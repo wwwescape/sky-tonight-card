@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "baseUrl": ".",                       // ✅ Added to support non-relative path mapping
+    "paths": {
+      "custom-card-helpers": ["node_modules/custom-card-helpers/dist"]
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/luxon"
+    ],
+    "types": ["luxon"],
+    "lib": ["ES2020", "DOM"],
+    "allowJs": false,
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "emitDecoratorMetadata": false,
+    "skipLibCheck": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
