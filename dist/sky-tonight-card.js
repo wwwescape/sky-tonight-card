@@ -169,7 +169,7 @@ const dt=173.1446326846693,ft=149597870.69098932,mt=.017453292519943295,yt=.2617
       align-items: center;
       gap: 4px;
     }
-  `,t([ht({attribute:!1})],Eo.prototype,"hass",void 0),t([function(t){return ht({...t,state:!0,attribute:!1})}()],Eo.prototype,"_config",void 0),Eo=t([ut("sky-tonight-card-editor")],Eo);const Do=[{body:Vt.Sun,name:"Sun",type:"Star",isNakedEye:!0,isBinocular:!0},{body:Vt.Moon,name:"Moon",type:"Moon",isNakedEye:!0,isBinocular:!0},{body:Vt.Mercury,name:"Mercury",type:"Planet",isNakedEye:!0,isBinocular:!0},{body:Vt.Venus,name:"Venus",type:"Planet",isNakedEye:!0,isBinocular:!0},{body:Vt.Mars,name:"Mars",type:"Planet",isNakedEye:!0,isBinocular:!0},{body:Vt.Jupiter,name:"Jupiter",type:"Planet",isNakedEye:!0,isBinocular:!0},{body:Vt.Saturn,name:"Saturn",type:"Planet",isNakedEye:!0,isBinocular:!0},{body:Vt.Uranus,name:"Uranus",type:"Planet",isNakedEye:!1,isBinocular:!0},{body:Vt.Neptune,name:"Neptune",type:"Planet",isNakedEye:!1,isBinocular:!0}];let Ao=class extends ot{constructor(){super(...arguments),this.config={showSun:!0,showBelowHorizon:!1}}setConfig(t){this.config=t}static getConfigElement(){return document.createElement("sky-tonight-card-editor")}render(){if(!this.hass||!this.config)return Z``;const t=this.config.lat||this.hass.config.latitude,e=this.config.lon||this.hass.config.longitude,n=this.config.elev||0,s=!1!==this.config.showSun,r=!0===this.config.showBelowHorizon,i=xo.local(),o=new me(t,e,n),a=Do.filter((t=>s||t.body!==Vt.Sun)).map((s=>{const{rise:r,set:a}=this.getRiseSet(o,s.body,i);if(!r||!a)return null;const u=this.getAltitude(s.body,i.toJSDate(),t,e,n);return{...s,rise:r,set:a,riseStr:r.toFormat("MMM dd HH:mm"),setStr:a.toFormat("MMM dd HH:mm"),duration:this.calculateDuration(r,a),altitude:u}})).filter((t=>!!t&&!(!r&&t.altitude<0))).sort(((t,e)=>t.rise.toMillis()-e.rise.toMillis())),u=this.getMoonPhase(i.toJSDate());return Z`
+  `,t([ht({attribute:!1})],Eo.prototype,"hass",void 0),t([function(t){return ht({...t,state:!0,attribute:!1})}()],Eo.prototype,"_config",void 0),Eo=t([ut("sky-tonight-card-editor")],Eo);const Do=[{body:Vt.Sun,name:"Sun",type:"Star",isNakedEye:!0,isBinocular:!0},{body:Vt.Moon,name:"Moon",type:"Moon",isNakedEye:!0,isBinocular:!0},{body:Vt.Mercury,name:"Mercury",type:"Planet",isNakedEye:!0,isBinocular:!0},{body:Vt.Venus,name:"Venus",type:"Planet",isNakedEye:!0,isBinocular:!0},{body:Vt.Mars,name:"Mars",type:"Planet",isNakedEye:!0,isBinocular:!0},{body:Vt.Jupiter,name:"Jupiter",type:"Planet",isNakedEye:!0,isBinocular:!0},{body:Vt.Saturn,name:"Saturn",type:"Planet",isNakedEye:!0,isBinocular:!0},{body:Vt.Uranus,name:"Uranus",type:"Planet",isNakedEye:!1,isBinocular:!0},{body:Vt.Neptune,name:"Neptune",type:"Planet",isNakedEye:!1,isBinocular:!0}];let Ao=class extends ot{constructor(){super(...arguments),this.config={showSun:!0,showBelowHorizon:!1}}setConfig(t){this.config=t}static getConfigElement(){return document.createElement("sky-tonight-card-editor")}render(){if(!this.hass||!this.config)return Z``;const t=this.config.lat||this.hass.config.latitude,e=this.config.lon||this.hass.config.longitude,n=this.config.elev||0,s=!1!==this.config.showSun,r=!0===this.config.showBelowHorizon,i=xo.local(),o=new me(t,e,n),a=Do.filter((t=>s||t.body!==Vt.Sun)).map((s=>{const{rise:r,set:a}=this.getRiseSet(o,s.body,i);if(!r||!a)return null;const u=this.getAltitude(s.body,i.toJSDate(),t,e,n);return{...s,rise:r,set:a,riseStr:r.toFormat("MMM dd HH:mm"),setStr:a.toFormat("MMM dd HH:mm"),duration:this.calculateDuration(r,a),altitude:u}})).filter((t=>!!t&&!(!r&&t.altitude<0))).sort(((t,e)=>t.rise.toMillis()-e.rise.toMillis())),u=this.getMoonPhase(i.toJSDate()),l=new URL(".",import.meta.url).href;return Z`
       <ha-card>
         <h2>Sky Tonight</h2>
         <div>
@@ -180,7 +180,7 @@ const dt=173.1446326846693,ft=149597870.69098932,mt=.017453292519943295,yt=.2617
         <div class="moon-phase">
           Moon Phase:
           <img
-            src="/local/sky-tonight-card/images/moon-phases/${this.toKebabCase(u)}.png"
+            src="${l}images/moon-phases/${this.toKebabCase(u)}.png"
             alt="${u}"
           />
           ${u}
@@ -189,7 +189,7 @@ const dt=173.1446326846693,ft=149597870.69098932,mt=.017453292519943295,yt=.2617
           ${a.map((t=>Z`
               <div class="astro-card">
                 <img
-                  src="/local/sky-tonight-card/images/objects/${t.name}.png"
+                  src="${l}images/objects/${t.name}.png"
                   alt="${t.name}"
                 />
                 <div class="astro-info">
@@ -206,19 +206,19 @@ const dt=173.1446326846693,ft=149597870.69098932,mt=.017453292519943295,yt=.2617
                 <div class="astro-icons">
                   <div>
                     <img
-                      src="/local/sky-tonight-card/images/${t.altitude>0&&t.isNakedEye?"eye.png":"eye_disabled.png"}"
+                      src="${l}images/${t.altitude>0&&t.isNakedEye?"eye.png":"eye_disabled.png"}"
                       alt="Naked Eye"
                     />
                   </div>
                   <div>
                     <img
-                      src="/local/sky-tonight-card/images/${t.altitude>0&&t.isBinocular?"binoculars.png":"binoculars_disabled.png"}"
+                      src="${l}images/${t.altitude>0&&t.isBinocular?"binoculars.png":"binoculars_disabled.png"}"
                       alt="Binocular"
                     />
                   </div>
                   <div>
                     <img
-                      src="/local/sky-tonight-card/images/${t.altitude>0?"telescope.png":"telescope_disabled.png"}"
+                      src="${l}images/${t.altitude>0?"telescope.png":"telescope_disabled.png"}"
                       alt="Telescope"
                     />
                   </div>

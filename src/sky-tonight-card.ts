@@ -233,6 +233,8 @@ export class SkyTonightNativeCard extends LitElement {
 
     const moonPhase = this.getMoonPhase(now.toJSDate());
 
+    const moduleBaseUrl = new URL(".", import.meta.url).href;
+
     return html`
       <ha-card>
         <h2>Sky Tonight</h2>
@@ -244,7 +246,7 @@ export class SkyTonightNativeCard extends LitElement {
         <div class="moon-phase">
           Moon Phase:
           <img
-            src="/local/sky-tonight-card/images/moon-phases/${this.toKebabCase(
+            src="${moduleBaseUrl}images/moon-phases/${this.toKebabCase(
               moonPhase
             )}.png"
             alt="${moonPhase}"
@@ -256,7 +258,7 @@ export class SkyTonightNativeCard extends LitElement {
             (obj) => html`
               <div class="astro-card">
                 <img
-                  src="/local/sky-tonight-card/images/objects/${obj.name}.png"
+                  src="${moduleBaseUrl}images/objects/${obj.name}.png"
                   alt="${obj.name}"
                 />
                 <div class="astro-info">
@@ -273,8 +275,8 @@ export class SkyTonightNativeCard extends LitElement {
                 <div class="astro-icons">
                   <div>
                     <img
-                      src="/local/sky-tonight-card/images/${obj.altitude >
-                        0 && obj.isNakedEye
+                      src="${moduleBaseUrl}images/${obj.altitude > 0 &&
+                      obj.isNakedEye
                         ? "eye.png"
                         : "eye_disabled.png"}"
                       alt="Naked Eye"
@@ -282,8 +284,8 @@ export class SkyTonightNativeCard extends LitElement {
                   </div>
                   <div>
                     <img
-                      src="/local/sky-tonight-card/images/${obj.altitude >
-                        0 && obj.isBinocular
+                      src="${moduleBaseUrl}images/${obj.altitude > 0 &&
+                      obj.isBinocular
                         ? "binoculars.png"
                         : "binoculars_disabled.png"}"
                       alt="Binocular"
@@ -291,8 +293,7 @@ export class SkyTonightNativeCard extends LitElement {
                   </div>
                   <div>
                     <img
-                      src="/local/sky-tonight-card/images/${obj.altitude >
-                      0
+                      src="${moduleBaseUrl}images/${obj.altitude > 0
                         ? "telescope.png"
                         : "telescope_disabled.png"}"
                       alt="Telescope"
@@ -427,5 +428,6 @@ export class SkyTonightNativeCard extends LitElement {
   type: "sky-tonight-card",
   name: "Sky Tonight Native Card",
   preview: false,
-  description: "A Home Assistant card showing sun, moon, and planet visibility using Astronomy Engine",
+  description:
+    "A Home Assistant card showing sun, moon, and planet visibility using Astronomy Engine",
 });
