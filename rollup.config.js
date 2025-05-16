@@ -1,7 +1,6 @@
 import typescript from 'rollup-plugin-typescript2';
 import resolve from 'rollup-plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
-import copy from 'rollup-plugin-copy';
 
 export default {
   input: 'src/sky-tonight-card.ts',
@@ -12,12 +11,6 @@ export default {
   plugins: [
     resolve(),
     typescript(),
-    terser(),
-    copy({
-      targets: [
-        { src: 'images', dest: 'dist' }
-      ],
-      copyOnce: false
-    })
+    terser()
   ]
 };

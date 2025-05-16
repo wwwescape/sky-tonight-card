@@ -233,8 +233,6 @@ export class SkyTonightNativeCard extends LitElement {
 
     const moonPhase = this.getMoonPhase(now.toJSDate());
 
-    const moduleBaseUrl = new URL(".", import.meta.url).href;
-
     return html`
       <ha-card>
         <h2>Sky Tonight</h2>
@@ -246,7 +244,7 @@ export class SkyTonightNativeCard extends LitElement {
         <div class="moon-phase">
           Moon Phase:
           <img
-            src="${moduleBaseUrl}images/moon-phases/${this.toKebabCase(
+            src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/moon-phases/${this.toKebabCase(
               moonPhase
             )}.png"
             alt="${moonPhase}"
@@ -258,7 +256,7 @@ export class SkyTonightNativeCard extends LitElement {
             (obj) => html`
               <div class="astro-card">
                 <img
-                  src="${moduleBaseUrl}images/objects/${obj.name}.png"
+                  src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/objects/${obj.name}.png"
                   alt="${obj.name}"
                 />
                 <div class="astro-info">
@@ -275,7 +273,7 @@ export class SkyTonightNativeCard extends LitElement {
                 <div class="astro-icons">
                   <div>
                     <img
-                      src="${moduleBaseUrl}images/${obj.altitude > 0 &&
+                      src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude > 0 &&
                       obj.isNakedEye
                         ? "eye.png"
                         : "eye_disabled.png"}"
@@ -284,7 +282,7 @@ export class SkyTonightNativeCard extends LitElement {
                   </div>
                   <div>
                     <img
-                      src="${moduleBaseUrl}images/${obj.altitude > 0 &&
+                      src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude > 0 &&
                       obj.isBinocular
                         ? "binoculars.png"
                         : "binoculars_disabled.png"}"
@@ -293,7 +291,7 @@ export class SkyTonightNativeCard extends LitElement {
                   </div>
                   <div>
                     <img
-                      src="${moduleBaseUrl}images/${obj.altitude > 0
+                      src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude > 0
                         ? "telescope.png"
                         : "telescope_disabled.png"}"
                       alt="Telescope"

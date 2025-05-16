@@ -2,18 +2,5 @@
   "name": "Sky Tonight Card",
   "filename": "sky-tonight-card.js",
   "render_readme": true,
-  "content_in_root": false,
-  "homeassistant": "2023.1.0",
-  "resources": [
-    {
-      "name": "sky-tonight-card.js",
-      "type": "module",
-      "path": "/dist/"
-    },
-    {
-      "name": "images",
-      "type": "directory",
-      "path": "/dist/images/"
-    }
-  ]
+  "content_in_root": false
 }
