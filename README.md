@@ -10,7 +10,17 @@
 
 ![Example](example.png)
 
+
 ## Installation
+
+
+### HACS install
+1. Open HACS.
+2. Click on the three dot menu in the top right corner of the screen → "Custom Repositories"
+3. Paste https://github.com/wwwescape/sky-tonight-card in the Repositories textbox and select Dashboard in the Type dropdown.
+4. Click Add.
+5. Search for 'Sky Tonight Card' and click the three dot menu besides it.
+6. Click Download.
 
 
 ### Manual install
@@ -29,6 +39,7 @@
 
 **Note:** The url path may need to be adjusted to reflect the location of your configuration direction, as seen from the running system.  For example on some HAAS systems it will appear to be `/root/config/www/sky-tonight-card/sky-tonight-card.js`  (i.e /root/config instead).
 
+
 ## Configuration
 
 | Name              | Type          | Default                               | Description                                                                                                                     |
@@ -39,6 +50,7 @@
 | elevation         | number        |                                       | Elevation of the observer in metres above sea level                                                                             |
 | showBelowHorizon  | boolean       | `false`                               | Set to true to display planetary bodies below the horizon as well                                                               |
 | showSun           | boolean       | `false`                               | Set to true to show the Sun as well                                                                                             |
+
 
 ## Example configurations
 
