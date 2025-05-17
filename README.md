@@ -21,12 +21,13 @@
 4. Click Add.
 5. Search for 'Sky Tonight Card' and click the three dot menu besides it.
 6. Click Download.
+7. Finally, refresh your browser window.
 
 
 ### Manual install
 1. Navigate to your `<config>/www/` folder inside your Home Assistant installation and create a new folder named `sky-tonight-card`.
-2. Manually download [sky-tonight-card.js](https://github.com/wwwescape/sky-tonight-card/releases/latest/download/sky-tonight-card.js) and the `images` folder.
-3. Place them inside the `sky-tonight-card` folder you created in step 1.
+2. Manually download [sky-tonight-card.js](https://github.com/wwwescape/sky-tonight-card/releases/latest/download/sky-tonight-card.js).
+3. Place the file inside the `sky-tonight-card` folder you created in step 1.
 4. Add the following to your `configuration.yaml` file:
   ```yaml
   lovelace:
