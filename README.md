@@ -46,6 +46,7 @@
 | Name                  | Type          | Default                               | Description                                                                                                                     |
 | --------------------- | ------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | type                  | string        | **Required**                          | `custom:sky-tonight-card`                                                                                                       |
+| title                 | string        | `Sky Tonight`                         | Title of the card                                                                                                               |
 | latitude              | number        |                                       | Latitude of the observer (uses Home Assistant config if not specified)                                                          |
 | longitude             | number        |                                       | Longitude of the observer (uses Home Assistant config if not specified)                                                         |
 | elevation             | number        | `0`                                   | Elevation of the observer in metres above sea level                                                                             |
@@ -53,7 +54,7 @@
 | showBelowHorizon      | boolean       | `false`                               | Set to true to display planetary bodies below the horizon as well                                                               |
 | showSun               | boolean       | `true`                                | Set to false to hide the Sun                                                                                                    |
 | showConfiguration     | boolean       | `true`                                | Set to false to hide the configuration section in the card                                                                      |
-| colors                | object        |                                       | Object containing color overrides (see [Color Customization](#color-customization) below)                                                               |
+| colors                | object        |                                       | Object containing color overrides (see [Color Customization](#color-customization) below)                                       |
 
 ### Color Customization
 
@@ -72,6 +73,7 @@ You can customize the card's appearance by providing a `colors` object with any 
 
 ```yaml
 type: custom:sky-tonight-card
+cardTitle: Objects in the sky
 latitude: 40.7128
 longitude: -74.0060
 elevation: 10
