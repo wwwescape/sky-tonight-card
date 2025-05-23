@@ -1,5 +1,5 @@
 import { LitElement, html, css, TemplateResult } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import {
   Observer,
   SearchRiseSet,
@@ -9,6 +9,7 @@ import {
   Horizon,
 } from "astronomy-engine";
 import { DateTime } from "luxon";
+import { translations, TranslationKey, LanguageCode } from "./translations";
 import "./sky-tonight-card-editor";
 
 type CelestialObjectInfo = {
@@ -89,118 +90,160 @@ const CelestialObjects: CelestialObjectInfo[] = [
 export class SkyTonightNativeCard extends LitElement {
   @property({ attribute: false }) public hass: any;
   @property({ type: Object }) private config: any = {
-    showSun: true, // Default to showing Sun
-    showBelowHorizon: false, // Default to hiding objects below horizon
+    showSun: true,
+    showBelowHorizon: false,
   };
+  @state() private languageOverride?: LanguageCode;
 
-  static styles = css`
-    ha-card {
-      padding: 16px;
-      background-color: #1b2431;
-      color: #ffffff;
-      font-family: "Segoe UI", sans-serif;
-      border-radius: 12px;
-    }
+  static get styles() {
+    return css`
+      ha-card {
+        padding: 16px;
+        background-color: var(--card-background-color, #1b2431);
+        color: var(--card-text-color, #ffffff);
+        font-family: "Segoe UI", sans-serif;
+        border-radius: 12px;
+      }
 
-    h2 {
-      margin: 0 0 10px;
-      font-size: 1.4rem;
-    }
+      h2 {
+        margin: 0 0 10px;
+        font-size: 1.4rem;
+        color: var(--card-text-color, #ffffff);
+      }
 
-    .summary,
-    .moon-phase {
-      margin: 8px 0;
-      font-size: 0.95rem;
-      color: #ddd;
-    }
+      .astro-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 12px;
+      }
 
-    .astro-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 12px;
-    }
+      .astro-card {
+        display: flex;
+        align-items: center;
+        background-color: var(--object-background-color, #223044);
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
 
-    .astro-card {
-      display: flex;
-      align-items: center;
-      background-color: #223044;
-      padding: 10px;
-      border-radius: 10px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    }
+      .astro-card img {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 12px;
+      }
 
-    .astro-card img {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 12px;
-    }
+      .astro-info {
+        flex: 1;
+      }
 
-    .astro-info {
-      flex: 1;
-    }
+      .astro-type {
+        font-size: 0.75rem;
+        color: var(--object-type-color, #aaaaaa);
+      }
 
-    .astro-type {
-      font-size: 0.75rem;
-      color: #aaa;
-    }
+      .astro-name {
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin: 2px 0;
+        color: var(--object-name-color, #ffffff);
+      }
 
-    .astro-name {
-      font-weight: 600;
-      font-size: 1.1rem;
-      margin: 2px 0;
-    }
+      .astro-data {
+        font-size: 0.85rem;
+        color: var(--object-data-color, #cccccc);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
 
-    .astro-data {
-      font-size: 0.85rem;
-      color: #ccc;
-    }
+      .astro-data img {
+        width: 16px;
+        height: 16px;
+        margin: 0;
+      }
 
-    .astro-icons {
-      font-size: 1.2rem;
-    }
+      .astro-icons {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
 
-    .astro-icons span {
-      margin-left: 8px;
-    }
+      .astro-icons img {
+        width: 20px;
+        height: 20px;
+      }
 
-    .moon-phase img {
-      vertical-align: middle;
-      height: 20px;
-      margin-left: 6px;
-    }
+      .location-info {
+        margin-bottom: 12px;
+        font-size: 0.9rem;
+        color: var(--object-data-color, #cccccc);
+      }
 
-    .astro-icons img {
-      width: 20px;
-      height: 20px;
-    }
-  `;
+      .location-info div {
+        margin: 4px 0;
+      }
+    `;
+  }
+
+  private _translate(key: TranslationKey): string {
+    const lang = (this.languageOverride ||
+      this.hass?.language ||
+      "en") as LanguageCode;
+    const [category, subKey] = key.split(".") as [
+      keyof typeof translations.en,
+      string
+    ];
+
+    // Type-safe lookup
+    const translationCategory = translations[lang]?.[category] as Record<
+      string,
+      string
+    >;
+    const englishCategory = translations.en[category] as Record<string, string>;
+
+    return translationCategory?.[subKey] || englishCategory?.[subKey] || key;
+  }
 
   setConfig(config: any): void {
-    this.config = config;
+    this.config = {
+      ...this.config,
+      ...config,
+      colors: {
+        ...this.config.colors,
+        ...config.colors,
+      },
+    };
+    this.languageOverride = config.languageOverride;
   }
 
   static getConfigElement() {
     return document.createElement("sky-tonight-card-editor");
   }
 
+  private getLocale(): string {
+    return this.languageOverride || this.hass?.locale?.language || "en-US";
+  }
+
   protected render(): TemplateResult {
     if (!this.hass || !this.config) return html``;
 
+    const cardTitle = this.config.cardTitle || this._translate("card.title");
     const latitude = this.config.lat || this.hass.config.latitude;
     const longitude = this.config.lon || this.hass.config.longitude;
     const elevation = this.config.elev || 0;
-    const showSun = this.config.showSun !== false; // Default to true if not specified
-    const showBelowHorizon = this.config.showBelowHorizon === true; // Default to false if not specified
+    const showSun = this.config.showSun !== false;
+    const showBelowHorizon = this.config.showBelowHorizon === true;
+    const showConfiguration = this.config.showConfiguration === true;
 
     const now = DateTime.local();
     const observer = new Observer(latitude, longitude, elevation);
 
     const celestialObjectsWithTimes = CelestialObjects.filter(
       (obj) => showSun || obj.body !== Body.Sun
-    ) // Filter out Sun if showSun is false
+    )
       .map((obj) => {
         const { rise, set } = this.getRiseSet(observer, obj.body, now);
         if (!rise || !set) return null;
@@ -213,18 +256,19 @@ export class SkyTonightNativeCard extends LitElement {
           elevation
         );
 
+        const locale = this.getLocale();
+
         return {
           ...obj,
           rise,
           set,
-          riseStr: rise.toFormat("MMM dd HH:mm"),
-          setStr: set.toFormat("MMM dd HH:mm"),
+          riseStr: rise.toFormat("MMM dd HH:mm", { locale }),
+          setStr: set.toFormat("MMM dd HH:mm", { locale }),
           duration: this.calculateDuration(rise, set),
           altitude,
         };
       })
       .filter((obj): obj is Exclude<typeof obj, null> => {
-        // Filter out null objects and objects below horizon if showBelowHorizon is false
         if (!obj) return false;
         if (!showBelowHorizon && obj.altitude < 0) return false;
         return true;
@@ -233,68 +277,116 @@ export class SkyTonightNativeCard extends LitElement {
 
     const moonPhase = this.getMoonPhase(now.toJSDate());
 
+    const style = html`
+      <style>
+        :host {
+          --card-background-color: ${this.config.colors?.cardBackground ||
+          "#1b2431"};
+          --card-text-color: ${this.config.colors?.cardTitle || "#ffffff"};
+          --object-background-color: ${this.config.colors?.objectBackground ||
+          "#223044"};
+          --object-name-color: ${this.config.colors?.objectName || "#ffffff"};
+          --object-data-color: ${this.config.colors?.objectData || "#cccccc"};
+          --object-type-color: ${this.config.colors?.objectType || "#aaaaaa"};
+        }
+      </style>
+    `;
+
     return html`
+      ${style}
       <ha-card>
-        <h2>Sky Tonight</h2>
-        <div>
-          <div><strong>Latitude:</strong> ${latitude.toFixed(2)}</div>
-          <div><strong>Longitude:</strong> ${longitude.toFixed(2)}</div>
-          <div><strong>Elevation:</strong> ${elevation}m</div>
-        </div>
-        <div class="moon-phase">
-          Moon Phase:
-          <img
-            src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/moon-phases/${this.toKebabCase(
-              moonPhase
-            )}.png"
-            alt="${moonPhase}"
-          />
-          ${moonPhase}
-        </div>
+        <h2>${cardTitle}</h2>
+        ${showConfiguration !== false
+          ? html`
+              <div>
+                <div>
+                  <strong>${this._translate("card.latitude")}:</strong>
+                  ${latitude.toFixed(2)}
+                </div>
+                <div>
+                  <strong>${this._translate("card.longitude")}:</strong>
+                  ${longitude.toFixed(2)}
+                </div>
+                <div>
+                  <strong>${this._translate("card.elevation")}:</strong>
+                  ${elevation}m
+                </div>
+              </div>
+            `
+          : ""}
         <div class="astro-list">
           ${celestialObjectsWithTimes.map(
             (obj) => html`
               <div class="astro-card">
                 <img
                   src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/objects/${obj.name}.png"
-                  alt="${obj.name}"
+                  alt="${this._translate(
+                    `objects.${obj.name}` as TranslationKey
+                  )}"
                 />
                 <div class="astro-info">
-                  <div class="astro-type">${obj.type}</div>
-                  <div class="astro-name">${obj.name}</div>
-                  <div class="astro-data">
-                    Visible: ${obj.riseStr} - ${obj.setStr}
+                  <div class="astro-type">
+                    ${this._translate(`types.${obj.type}` as TranslationKey)}
                   </div>
-                  <div class="astro-data">Duration: ${obj.duration}</div>
-                  <div class="astro-data">
-                    Altitude: ${obj.altitude.toFixed(1)}°
+                  <div class="astro-name">
+                    ${this._translate(`objects.${obj.name}` as TranslationKey)}
                   </div>
+                  <div class="astro-data">
+                    ${this._translate("card.visible")}: ${obj.riseStr} -
+                    ${obj.setStr}
+                  </div>
+                  <div class="astro-data">
+                    ${this._translate("card.duration")}: ${obj.duration}
+                  </div>
+                  <div class="astro-data">
+                    ${this._translate("card.altitude")}:
+                    ${obj.altitude.toFixed(1)}°
+                  </div>
+                  ${obj.body === Body.Moon
+                    ? html`
+                        <div class="astro-data">
+                          ${this._translate("card.moonPhase")}:
+                          <img
+                            src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/moon-phases/${this.toKebabCase(
+                              moonPhase
+                            )}.png"
+                            alt="${this._translate(
+                              `moonPhases.${moonPhase}` as TranslationKey
+                            )}"
+                          />
+                          ${this._translate(
+                            `moonPhases.${moonPhase}` as TranslationKey
+                          )}
+                        </div>
+                      `
+                    : ""}
                 </div>
                 <div class="astro-icons">
                   <div>
                     <img
-                      src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude > 0 &&
-                      obj.isNakedEye
+                      src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude >
+                        0 && obj.isNakedEye
                         ? "eye.png"
                         : "eye_disabled.png"}"
-                      alt="Naked Eye"
+                      alt="${this._translate("card.nakedEye")}"
                     />
                   </div>
                   <div>
                     <img
-                      src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude > 0 &&
-                      obj.isBinocular
+                      src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude >
+                        0 && obj.isBinocular
                         ? "binoculars.png"
                         : "binoculars_disabled.png"}"
-                      alt="Binocular"
+                      alt="${this._translate("card.binocular")}"
                     />
                   </div>
                   <div>
                     <img
-                      src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude > 0
+                      src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude >
+                      0
                         ? "telescope.png"
                         : "telescope_disabled.png"}"
-                      alt="Telescope"
+                      alt="${this._translate("card.telescope")}"
                     />
                   </div>
                 </div>
@@ -391,24 +483,23 @@ export class SkyTonightNativeCard extends LitElement {
     const diff = set.diff(rise, ["hours", "minutes"]).toObject();
     const hours = Math.floor(diff.hours || 0);
     const minutes = Math.round(diff.minutes || 0);
-    return `${hours}h ${minutes}m`;
+    return `${hours}${this._translate("time.h")} ${minutes}${this._translate(
+      "time.m"
+    )}`;
   }
 
   private getMoonPhase(date: Date): string {
     const phase = MoonPhase(date);
-    // Exact phase points (single-degree moments)
     if (phase === 0) return "New Moon";
     if (phase === 90) return "First Quarter";
     if (phase === 180) return "Full Moon";
-    if (phase === 270) return "Last Quarter"; // (also called Third Quarter)
+    if (phase === 270) return "Last Quarter";
 
-    // Ranges between exact phases
     if (phase > 0 && phase < 90) return "Waxing Crescent";
     if (phase > 90 && phase < 180) return "Waxing Gibbous";
     if (phase > 180 && phase < 270) return "Waning Gibbous";
     if (phase > 270 && phase < 360) return "Waning Crescent";
 
-    // Fallback (shouldn't be needed if MoonPhase() returns [0, 360))
     return "New Moon";
   }
 

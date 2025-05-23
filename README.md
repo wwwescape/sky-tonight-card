@@ -43,20 +43,55 @@
 
 ## Configuration
 
-| Name              | Type          | Default                               | Description                                                                                                                     |
-| ----------------- | ------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| type              | string        | **Required**                          | `custom:sky-tonight-card`                                                                                                       |
-| latitude          | string        |                                       | Latitude of the observer                                                                                                        |
-| longitude         | string        |                                       | Longitude of the observer                                                                                                       |
-| elevation         | number        |                                       | Elevation of the observer in metres above sea level                                                                             |
-| showBelowHorizon  | boolean       | `false`                               | Set to true to display planetary bodies below the horizon as well                                                               |
-| showSun           | boolean       | `false`                               | Set to true to show the Sun as well                                                                                             |
+| Name                  | Type          | Default                               | Description                                                                                                                     |
+| --------------------- | ------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| type                  | string        | **Required**                          | `custom:sky-tonight-card`                                                                                                       |
+| latitude              | number        |                                       | Latitude of the observer (uses Home Assistant config if not specified)                                                          |
+| longitude             | number        |                                       | Longitude of the observer (uses Home Assistant config if not specified)                                                         |
+| elevation             | number        | `0`                                   | Elevation of the observer in metres above sea level                                                                             |
+| languageOverride      | string        |                                       | Override language (options: "en", "hi", "fr" - uses Home Assistant language if not specified)                                   |
+| showBelowHorizon      | boolean       | `false`                               | Set to true to display planetary bodies below the horizon as well                                                               |
+| showSun               | boolean       | `true`                                | Set to false to hide the Sun                                                                                                    |
+| showConfiguration     | boolean       | `true`                                | Set to false to hide the configuration section in the card                                                                      |
+| colors                | object        |                                       | Object containing color overrides (see [Color Customization](#color-customization) below)                                                               |
 
+### Color Customization
 
-## Example configurations
+You can customize the card's appearance by providing a `colors` object with any of these properties:
+
+| Property             | Default       | Description                                                                                                                     |
+| -------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| cardBackground       | `#1b2431`     | Background color of the card                                                                                                    |
+| cardTitle            | `#ffffff`     | Color of the card title                                                                                                         |
+| objectBackground     | `#223044`     | Background color of each object's container                                                                                     |
+| objectName           | `#ffffff`     | Color of the object's name                                                                                                      |
+| objectData           | `#cccccc`     | Color of the object's data (right side text)                                                                                    |
+| objectType           | `#aaaaaa`     | Color of the object's type text                                                                                                 |
+
+### Example Configuration
 
 ```yaml
 type: custom:sky-tonight-card
-latitude: 28.627222
-longitude: -80.620833
+latitude: 40.7128
+longitude: -74.0060
+elevation: 10
+showBelowHorizon: false
+showSun: true
+showConfiguration: true
+languageOverride: "en"
+colors:
+  cardBackground: "#1b2431"
+  cardTitle: "#ffffff"
+  objectBackground: "#223044"
+  objectName: "#ffffff"
+  objectData: "#cccccc"
+  objectType: "#aaaaaa"
 ```
+
+
+## Adding Translations
+
+1. Duplicate `translation-template.ts` as `[lang-code].ts`
+2. Fill in all string values
+3. Add the language to `translations/index.ts`
+4. Submit pull request

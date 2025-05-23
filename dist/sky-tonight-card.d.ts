@@ -3,9 +3,12 @@ import "./sky-tonight-card-editor";
 export declare class SkyTonightNativeCard extends LitElement {
     hass: any;
     private config;
-    static styles: import("lit").CSSResult;
+    private languageOverride?;
+    static get styles(): import("lit").CSSResult;
+    private _translate;
     setConfig(config: any): void;
     static getConfigElement(): HTMLElement;
+    private getLocale;
     protected render(): TemplateResult;
     private getAltitude;
     private getRiseSet;

@@ -1,16 +1,12 @@
-import typescript from 'rollup-plugin-typescript2';
-import resolve from 'rollup-plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
+import resolve from "rollup-plugin-node-resolve";
+import typescript from "rollup-plugin-typescript2";
+import { terser } from "rollup-plugin-terser";
 
 export default {
-  input: 'src/sky-tonight-card.ts',
+  input: "src/sky-tonight-card.ts",
   output: {
-    file: 'dist/sky-tonight-card.js',
-    format: 'es',
+    file: "dist/sky-tonight-card.js",
+    format: "es",
   },
-  plugins: [
-    resolve(),
-    typescript(),
-    terser()
-  ]
+  plugins: [resolve(), typescript(), terser()],
 };
