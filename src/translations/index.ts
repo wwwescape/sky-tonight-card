@@ -1,6 +1,7 @@
 import { en } from "./en";
 import { hi } from "./hi";
 import { fr } from "./fr";
+import { it } from "./it";
 
 export type TranslationKey =
   | `card.${keyof typeof en.card}`
@@ -15,6 +16,7 @@ export const translations = {
   en,
   hi,
   fr,
+  it,
 } as const;
 
 export type LanguageCode = keyof typeof translations;
