@@ -68,6 +68,8 @@ export const hi = {
   languages: {
     en: "अंग्रेज़ी",
     hi: "हिंदी",
-    fr: "फ्रेंच",
+    fr: "फ़्रेंच",
+    it: "इतालवी",
+    de: "जर्मन",
   },
 } as const;
