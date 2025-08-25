@@ -69,5 +69,7 @@ export const en = {
     en: "English",
     hi: "Hindi",
     fr: "French",
+    it: "Italian",
+    de: "German",
   },
 } as const;
