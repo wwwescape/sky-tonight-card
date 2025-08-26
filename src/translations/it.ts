@@ -1,74 +1,75 @@
-export declare const it: {
-    readonly card: {
-        readonly title: "Il Cielo Stanotte";
-        readonly latitude: "Latitudine";
-        readonly longitude: "Longitudine";
-        readonly elevation: "Elevazione";
-        readonly moonPhase: "Fase Lunare";
-        readonly visible: "Visibile";
-        readonly duration: "Durata";
-        readonly altitude: "Altitudine";
-        readonly nakedEye: "Occhio";
-        readonly binocular: "Binocolo";
-        readonly telescope: "Telescopio";
-    };
-    readonly objects: {
-        readonly Sun: "Sole";
-        readonly Moon: "Luna";
-        readonly Mercury: "Mercurio";
-        readonly Venus: "Venere";
-        readonly Mars: "Marte";
-        readonly Jupiter: "Giove";
-        readonly Saturn: "Saturno";
-        readonly Uranus: "Urano";
-        readonly Neptune: "Nettuno";
-        readonly Pluto: "Plutone";
-    };
-    readonly moonPhases: {
-        readonly "New Moon": "Luna Nuova";
-        readonly "Waxing Crescent": "Luna Crescente";
-        readonly "First Quarter": "Primo Quarto";
-        readonly "Waxing Gibbous": "Gibbosa Crescente";
-        readonly "Full Moon": "Luna Piena";
-        readonly "Waning Gibbous": "Gibbosa Calante";
-        readonly "Last Quarter": "Ultimo Quarto";
-        readonly "Waning Crescent": "Luna Calante";
-    };
-    readonly types: {
-        readonly Star: "Stella";
-        readonly Planet: "Pianeta";
-        readonly Moon: "Luna";
-    };
-    readonly time: {
-        readonly h: "ore";
-        readonly m: "minuti";
-    };
-    readonly editor: {
-        readonly latitude: "Latitudine";
-        readonly longitude: "Longitudine";
-        readonly elevation: "Elevazione";
-        readonly elevationUnit: "metri";
-        readonly languageOverride: "Sovrascrivi Linguaggio";
-        readonly useHASetting: "Usa impostazioni HA";
-        readonly showSun: "Mostra Sole";
-        readonly showBelowHorizon: "Mostra oggetti sotto l'orizzonte";
-        readonly showConfiguration: "Mostra Configurazione";
-        readonly colorCustomization: "Configurazione Colore";
-        readonly cardBackground: "Sfondo";
-        readonly cardTitle: "Titolo";
-        readonly objectBackground: "Sfondo oggetto";
-        readonly objectName: "Nome";
-        readonly objectData: "Dati";
-        readonly objectType: "Tipo";
-        readonly reset: "Reimposta";
-        readonly optional: "opzionale";
-        readonly yes: "Si";
-        readonly no: "No";
-    };
-    readonly languages: {
-        readonly en: "Inglese";
-        readonly hi: "Indiano";
-        readonly fr: "Francese";
-        readonly it: "Italiano";
-    };
-};
+export const it = {
+  card: {
+    title: "Il Cielo Stanotte",
+    latitude: "Latitudine",
+    longitude: "Longitudine",
+    elevation: "Altitudine",
+    moonPhase: "Fase Lunare",
+    visible: "Visibile",
+    duration: "Durata",
+    altitude: "Altitudine",
+    nakedEye: "Ad Occhio Nudo",
+    binocular: "Binocolo",
+    telescope: "Telescopio",
+  },
+  objects: {
+    Sun: "Sole",
+    Moon: "Luna",
+    Mercury: "Mercurio",
+    Venus: "Venere",
+    Mars: "Marte",
+    Jupiter: "Giove",
+    Saturn: "Saturno",
+    Uranus: "Urano",
+    Neptune: "Nettuno",
+    Pluto: "Plutone",
+  },
+  moonPhases: {
+    "New Moon": "Luna Nuova",
+    "Waxing Crescent": "Luna Crescente",
+    "First Quarter": "Primo Quarto",
+    "Waxing Gibbous": "Gibbosa Crescente",
+    "Full Moon": "Luna Piena",
+    "Waning Gibbous": "Gibbosa Calante",
+    "Last Quarter": "Ultimo Quarto",
+    "Waning Crescent": "Luna Calante",
+  },
+  types: {
+    Star: "Stella",
+    Planet: "Pianeta",
+    Moon: "Luna",
+  },
+  time: {
+    h: "h",
+    m: "min",
+  },
+  editor: {
+    latitude: "Latitudine",
+    longitude: "Longitudine",
+    elevation: "Altitudine",
+    elevationUnit: "metri",
+    languageOverride: "Sovrascrivi lingua",
+    useHASetting: "Usa impostazioni HA",
+    showSun: "Mostra Sole",
+    showBelowHorizon: "Mostra oggetti sotto l'orizzonte",
+    showConfiguration: "Mostra configurazione",
+    colorCustomization: "Personalizzazione colori",
+    cardBackground: "Sfondo scheda",
+    cardTitle: "Titolo scheda",
+    objectBackground: "Sfondo oggetto",
+    objectName: "Nome oggetto",
+    objectData: "Dati oggetto",
+    objectType: "Tipo di oggetto",
+    reset: "Reimposta",
+    optional: "opzionale",
+    yes: "Sì",
+    no: "No",
+  },
+  languages: {
+    en: "Inglese",
+    hi: "Hindi",
+    fr: "Francese",
+    it: "Italiano",
+    de: "Tedesco",
+  },
+} as const;
