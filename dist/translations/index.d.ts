@@ -1,5 +1,5 @@
 import { en } from "./en";
-export type TranslationKey = `card.${keyof typeof en.card}` | `objects.${keyof typeof en.objects}` | `moonPhases.${keyof typeof en.moonPhases}` | `types.${keyof typeof en.types}` | `time.${keyof typeof en.time}` | `editor.${keyof typeof en.editor}` | `languages.${keyof typeof en.languages}` | `eclipseKinds.${keyof typeof en.eclipseKinds}` | `eclipseTypes.${keyof typeof en.eclipseTypes}`;
+export type TranslationKey = `card.${keyof typeof en.card}` | `objects.${keyof typeof en.objects}` | `moonPhases.${keyof typeof en.moonPhases}` | `types.${keyof typeof en.types}` | `time.${keyof typeof en.time}` | `editor.${keyof typeof en.editor}` | `languages.${keyof typeof en.languages}` | `eclipseKinds.${keyof typeof en.eclipseKinds}` | `eclipseTypes.${keyof typeof en.eclipseTypes}` | `events.${keyof typeof en.events}`;
 export declare const translations: {
     readonly en: {
         readonly card: {
@@ -21,6 +21,10 @@ export declare const translations: {
             readonly eclipseObscuration: "Obscuration";
             readonly eclipsePeak: "Peak";
             readonly eclipseCurrent: "Currently in progress";
+            readonly visibility: "Visibility";
+            readonly morning: "Morning";
+            readonly evening: "Evening";
+            readonly distance: "Distance";
         };
         readonly eclipseKinds: {
             readonly penumbral: "Penumbral";
@@ -31,6 +35,13 @@ export declare const translations: {
         readonly eclipseTypes: {
             readonly lunar: "Lunar Eclipse";
             readonly solar: "Solar Eclipse";
+        };
+        readonly events: {
+            readonly equinox: "Equinox";
+            readonly solstice: "Solstice";
+            readonly opposition: "Opposition";
+            readonly greatestElongation: "Greatest Elongation";
+            readonly supermoon: "Supermoon";
         };
         readonly objects: {
             readonly Sun: "Sun";
@@ -111,6 +122,10 @@ export declare const translations: {
             readonly eclipseObscuration: "अस्पष्टता";
             readonly eclipsePeak: "चरम";
             readonly eclipseCurrent: "अभी जारी है";
+            readonly visibility: "दृश्यता";
+            readonly morning: "सुबह";
+            readonly evening: "शाम";
+            readonly distance: "दूरी";
         };
         readonly eclipseKinds: {
             readonly penumbral: "उपच्छाया";
@@ -121,6 +136,13 @@ export declare const translations: {
         readonly eclipseTypes: {
             readonly lunar: "चंद्र ग्रहण";
             readonly solar: "सूर्य ग्रहण";
+        };
+        readonly events: {
+            readonly equinox: "विषुव";
+            readonly solstice: "अयनांत";
+            readonly opposition: "प्रतियुति";
+            readonly greatestElongation: "अधिकतम दिगंश";
+            readonly supermoon: "सुपरमून";
         };
         readonly objects: {
             readonly Sun: "सूर्य";
@@ -201,6 +223,10 @@ export declare const translations: {
             readonly eclipseObscuration: "Obscuration";
             readonly eclipsePeak: "Maximum";
             readonly eclipseCurrent: "En cours";
+            readonly visibility: "Visibilité";
+            readonly morning: "Matin";
+            readonly evening: "Soir";
+            readonly distance: "Distance";
         };
         readonly eclipseKinds: {
             readonly penumbral: "Pénombre";
@@ -211,6 +237,13 @@ export declare const translations: {
         readonly eclipseTypes: {
             readonly lunar: "Éclipse lunaire";
             readonly solar: "Éclipse solaire";
+        };
+        readonly events: {
+            readonly equinox: "Équinoxe";
+            readonly solstice: "Solstice";
+            readonly opposition: "Opposition";
+            readonly greatestElongation: "Plus grande élongation";
+            readonly supermoon: "Super lune";
         };
         readonly objects: {
             readonly Sun: "Soleil";

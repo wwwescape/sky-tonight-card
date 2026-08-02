@@ -18,6 +18,10 @@ export declare const hi: {
         readonly eclipseObscuration: "अस्पष्टता";
         readonly eclipsePeak: "चरम";
         readonly eclipseCurrent: "अभी जारी है";
+        readonly visibility: "दृश्यता";
+        readonly morning: "सुबह";
+        readonly evening: "शाम";
+        readonly distance: "दूरी";
     };
     readonly eclipseKinds: {
         readonly penumbral: "उपच्छाया";
@@ -28,6 +32,13 @@ export declare const hi: {
     readonly eclipseTypes: {
         readonly lunar: "चंद्र ग्रहण";
         readonly solar: "सूर्य ग्रहण";
+    };
+    readonly events: {
+        readonly equinox: "विषुव";
+        readonly solstice: "अयनांत";
+        readonly opposition: "प्रतियुति";
+        readonly greatestElongation: "अधिकतम दिगंश";
+        readonly supermoon: "सुपरमून";
     };
     readonly objects: {
         readonly Sun: "सूर्य";

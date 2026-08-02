@@ -13,7 +13,8 @@ export type TranslationKey =
   | `editor.${keyof typeof en.editor}`
   | `languages.${keyof typeof en.languages}`
   | `eclipseKinds.${keyof typeof en.eclipseKinds}`
-  | `eclipseTypes.${keyof typeof en.eclipseTypes}`;
+  | `eclipseTypes.${keyof typeof en.eclipseTypes}`
+  | `events.${keyof typeof en.events}`;
 
 export const translations = {
   en,

@@ -18,6 +18,10 @@ export declare const fr: {
         readonly eclipseObscuration: "Obscuration";
         readonly eclipsePeak: "Maximum";
         readonly eclipseCurrent: "En cours";
+        readonly visibility: "Visibilité";
+        readonly morning: "Matin";
+        readonly evening: "Soir";
+        readonly distance: "Distance";
     };
     readonly eclipseKinds: {
         readonly penumbral: "Pénombre";
@@ -28,6 +32,13 @@ export declare const fr: {
     readonly eclipseTypes: {
         readonly lunar: "Éclipse lunaire";
         readonly solar: "Éclipse solaire";
+    };
+    readonly events: {
+        readonly equinox: "Équinoxe";
+        readonly solstice: "Solstice";
+        readonly opposition: "Opposition";
+        readonly greatestElongation: "Plus grande élongation";
+        readonly supermoon: "Super lune";
     };
     readonly objects: {
         readonly Sun: "Soleil";

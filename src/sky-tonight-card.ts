@@ -12,6 +12,10 @@ import { DateTime } from "luxon";
 import { translations, TranslationKey, LanguageCode } from "./translations";
 import { EventCategory, EventRow } from "./event-types";
 import { EclipseInfo, getUpcomingEclipses } from "./eclipses";
+import {
+  CelestialEventInfo,
+  getUpcomingCelestialEvents,
+} from "./celestial-events";
 import "./sky-tonight-card-editor";
 
 type CelestialObjectInfo = {
@@ -267,6 +271,7 @@ export class SkyTonightNativeCard extends LitElement {
     const showBelowHorizon = this.config.showBelowHorizon === true;
     const showConfiguration = this.config.showConfiguration === true;
     const showEclipses = this.config.showEclipses !== false;
+    const showCelestialEvents = this.config.showCelestialEvents !== false;
 
     const now = DateTime.local();
     const observer = new Observer(latitude, longitude, elevation);
@@ -309,6 +314,7 @@ export class SkyTonightNativeCard extends LitElement {
 
     const upcomingEvents = this.getUpcomingEvents(observer, now, {
       showEclipses,
+      showCelestialEvents,
     });
     const eventsByCategory = this.groupEventsByCategory(upcomingEvents);
 
@@ -475,13 +481,16 @@ export class SkyTonightNativeCard extends LitElement {
   private getUpcomingEvents(
     observer: Observer,
     now: DateTime,
-    flags: { showEclipses: boolean }
+    flags: { showEclipses: boolean; showCelestialEvents: boolean }
   ): EventRow[] {
     const events: EventRow[] = [];
     if (flags.showEclipses) {
       events.push(...this.getEclipseEventRows(observer, now));
     }
-    // Populated by later phases: meteor showers, celestial events.
+    if (flags.showCelestialEvents) {
+      events.push(...this.getCelestialEventRows(now));
+    }
+    // Populated by a later phase: meteor showers.
     return events;
   }
 
@@ -525,6 +534,65 @@ export class SkyTonightNativeCard extends LitElement {
       name,
       date: eclipse.peak,
       subtitle: lines.join("\n"),
+    };
+  }
+
+  private getCelestialEventRows(now: DateTime): EventRow[] {
+    const locale = this.getLocale();
+    const events = getUpcomingCelestialEvents(now.toJSDate());
+
+    return events.map((event) => this.buildCelestialEventRow(event, locale));
+  }
+
+  private buildCelestialEventRow(
+    event: CelestialEventInfo,
+    locale: string
+  ): EventRow {
+    const bodyLabel = event.bodyName
+      ? this._translate(`objects.${event.bodyName}` as TranslationKey)
+      : undefined;
+
+    let name: string;
+    const lines: string[] = [];
+
+    switch (event.kind) {
+      case "equinox":
+      case "solstice":
+        name = this._translate(`events.${event.kind}`);
+        break;
+      case "opposition":
+        name = `${bodyLabel} ${this._translate("events.opposition")}`;
+        break;
+      case "greatestElongation":
+        name = `${bodyLabel} ${this._translate("events.greatestElongation")}`;
+        if (event.visibility) {
+          lines.push(
+            `${this._translate("card.visibility")}: ${this._translate(
+              `card.${event.visibility}` as TranslationKey
+            )}`
+          );
+        }
+        if (event.elongationDegrees !== undefined) {
+          lines.push(`${event.elongationDegrees.toFixed(1)}°`);
+        }
+        break;
+      case "supermoon":
+        name = this._translate("events.supermoon");
+        if (event.distanceKm !== undefined) {
+          lines.push(
+            `${this._translate(
+              "card.distance"
+            )}: ${Math.round(event.distanceKm).toLocaleString(locale)} km`
+          );
+        }
+        break;
+    }
+
+    return {
+      category: "celestialEvent",
+      name,
+      date: event.date,
+      subtitle: lines.length > 0 ? lines.join("\n") : undefined,
     };
   }
 

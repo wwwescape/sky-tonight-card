@@ -18,6 +18,10 @@ export const fr = {
     eclipseObscuration: "Obscuration",
     eclipsePeak: "Maximum",
     eclipseCurrent: "En cours",
+    visibility: "Visibilité",
+    morning: "Matin",
+    evening: "Soir",
+    distance: "Distance",
   },
   eclipseKinds: {
     penumbral: "Pénombre",
@@ -28,6 +32,13 @@ export const fr = {
   eclipseTypes: {
     lunar: "Éclipse lunaire",
     solar: "Éclipse solaire",
+  },
+  events: {
+    equinox: "Équinoxe",
+    solstice: "Solstice",
+    opposition: "Opposition",
+    greatestElongation: "Plus grande élongation",
+    supermoon: "Super lune",
   },
   objects: {
     Sun: "Soleil",

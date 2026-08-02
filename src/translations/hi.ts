@@ -18,6 +18,10 @@ export const hi = {
     eclipseObscuration: "अस्पष्टता",
     eclipsePeak: "चरम",
     eclipseCurrent: "अभी जारी है",
+    visibility: "दृश्यता",
+    morning: "सुबह",
+    evening: "शाम",
+    distance: "दूरी",
   },
   eclipseKinds: {
     penumbral: "उपच्छाया",
@@ -28,6 +32,13 @@ export const hi = {
   eclipseTypes: {
     lunar: "चंद्र ग्रहण",
     solar: "सूर्य ग्रहण",
+  },
+  events: {
+    equinox: "विषुव",
+    solstice: "अयनांत",
+    opposition: "प्रतियुति",
+    greatestElongation: "अधिकतम दिगंश",
+    supermoon: "सुपरमून",
   },
   objects: {
     Sun: "सूर्य",
