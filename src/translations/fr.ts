@@ -15,6 +15,19 @@ export const fr = {
     eclipses: "Éclipses",
     meteorShowers: "Pluies de météores",
     celestialEvents: "Événements célestes",
+    eclipseObscuration: "Obscuration",
+    eclipsePeak: "Maximum",
+    eclipseCurrent: "En cours",
+  },
+  eclipseKinds: {
+    penumbral: "Pénombre",
+    partial: "Partielle",
+    annular: "Annulaire",
+    total: "Totale",
+  },
+  eclipseTypes: {
+    lunar: "Éclipse lunaire",
+    solar: "Éclipse solaire",
   },
   objects: {
     Sun: "Soleil",

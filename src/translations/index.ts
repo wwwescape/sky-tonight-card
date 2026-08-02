@@ -11,7 +11,9 @@ export type TranslationKey =
   | `types.${keyof typeof en.types}`
   | `time.${keyof typeof en.time}`
   | `editor.${keyof typeof en.editor}`
-  | `languages.${keyof typeof en.languages}`;
+  | `languages.${keyof typeof en.languages}`
+  | `eclipseKinds.${keyof typeof en.eclipseKinds}`
+  | `eclipseTypes.${keyof typeof en.eclipseTypes}`;
 
 export const translations = {
   en,

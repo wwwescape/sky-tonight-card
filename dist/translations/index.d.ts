@@ -1,5 +1,5 @@
 import { en } from "./en";
-export type TranslationKey = `card.${keyof typeof en.card}` | `objects.${keyof typeof en.objects}` | `moonPhases.${keyof typeof en.moonPhases}` | `types.${keyof typeof en.types}` | `time.${keyof typeof en.time}` | `editor.${keyof typeof en.editor}` | `languages.${keyof typeof en.languages}`;
+export type TranslationKey = `card.${keyof typeof en.card}` | `objects.${keyof typeof en.objects}` | `moonPhases.${keyof typeof en.moonPhases}` | `types.${keyof typeof en.types}` | `time.${keyof typeof en.time}` | `editor.${keyof typeof en.editor}` | `languages.${keyof typeof en.languages}` | `eclipseKinds.${keyof typeof en.eclipseKinds}` | `eclipseTypes.${keyof typeof en.eclipseTypes}`;
 export declare const translations: {
     readonly en: {
         readonly card: {
@@ -18,6 +18,19 @@ export declare const translations: {
             readonly eclipses: "Eclipses";
             readonly meteorShowers: "Meteor Showers";
             readonly celestialEvents: "Celestial Events";
+            readonly eclipseObscuration: "Obscuration";
+            readonly eclipsePeak: "Peak";
+            readonly eclipseCurrent: "Currently in progress";
+        };
+        readonly eclipseKinds: {
+            readonly penumbral: "Penumbral";
+            readonly partial: "Partial";
+            readonly annular: "Annular";
+            readonly total: "Total";
+        };
+        readonly eclipseTypes: {
+            readonly lunar: "Lunar Eclipse";
+            readonly solar: "Solar Eclipse";
         };
         readonly objects: {
             readonly Sun: "Sun";
@@ -95,6 +108,19 @@ export declare const translations: {
             readonly eclipses: "ग्रहण";
             readonly meteorShowers: "उल्का वर्षा";
             readonly celestialEvents: "खगोलीय घटनाएँ";
+            readonly eclipseObscuration: "अस्पष्टता";
+            readonly eclipsePeak: "चरम";
+            readonly eclipseCurrent: "अभी जारी है";
+        };
+        readonly eclipseKinds: {
+            readonly penumbral: "उपच्छाया";
+            readonly partial: "आंशिक";
+            readonly annular: "कंकणाकृति";
+            readonly total: "पूर्ण";
+        };
+        readonly eclipseTypes: {
+            readonly lunar: "चंद्र ग्रहण";
+            readonly solar: "सूर्य ग्रहण";
         };
         readonly objects: {
             readonly Sun: "सूर्य";
@@ -172,6 +198,19 @@ export declare const translations: {
             readonly eclipses: "Éclipses";
             readonly meteorShowers: "Pluies de météores";
             readonly celestialEvents: "Événements célestes";
+            readonly eclipseObscuration: "Obscuration";
+            readonly eclipsePeak: "Maximum";
+            readonly eclipseCurrent: "En cours";
+        };
+        readonly eclipseKinds: {
+            readonly penumbral: "Pénombre";
+            readonly partial: "Partielle";
+            readonly annular: "Annulaire";
+            readonly total: "Totale";
+        };
+        readonly eclipseTypes: {
+            readonly lunar: "Éclipse lunaire";
+            readonly solar: "Éclipse solaire";
         };
         readonly objects: {
             readonly Sun: "Soleil";

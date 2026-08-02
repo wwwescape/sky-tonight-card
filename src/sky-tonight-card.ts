@@ -11,6 +11,7 @@ import {
 import { DateTime } from "luxon";
 import { translations, TranslationKey, LanguageCode } from "./translations";
 import { EventCategory, EventRow } from "./event-types";
+import { EclipseInfo, getUpcomingEclipses } from "./eclipses";
 import "./sky-tonight-card-editor";
 
 type CelestialObjectInfo = {
@@ -207,6 +208,12 @@ export class SkyTonightNativeCard extends LitElement {
         font-size: 0.95rem;
         color: var(--object-type-color, #aaaaaa);
       }
+
+      .event-subtitle {
+        font-size: 0.85rem;
+        color: var(--object-data-color, #cccccc);
+        white-space: pre-line;
+      }
     `;
   }
 
@@ -259,6 +266,7 @@ export class SkyTonightNativeCard extends LitElement {
     const showSun = this.config.showSun !== false;
     const showBelowHorizon = this.config.showBelowHorizon === true;
     const showConfiguration = this.config.showConfiguration === true;
+    const showEclipses = this.config.showEclipses !== false;
 
     const now = DateTime.local();
     const observer = new Observer(latitude, longitude, elevation);
@@ -299,7 +307,9 @@ export class SkyTonightNativeCard extends LitElement {
 
     const moonPhase = this.getMoonPhase(now.toJSDate());
 
-    const upcomingEvents = this.getUpcomingEvents(observer, now);
+    const upcomingEvents = this.getUpcomingEvents(observer, now, {
+      showEclipses,
+    });
     const eventsByCategory = this.groupEventsByCategory(upcomingEvents);
 
     const style = html`
@@ -436,7 +446,7 @@ export class SkyTonightNativeCard extends LitElement {
                               <div class="astro-info">
                                 <div class="astro-name">${event.name}</div>
                                 ${event.subtitle
-                                  ? html`<div class="astro-data">
+                                  ? html`<div class="event-subtitle">
                                       ${event.subtitle}
                                     </div>`
                                   : ""}
@@ -462,9 +472,60 @@ export class SkyTonightNativeCard extends LitElement {
     `;
   }
 
-  private getUpcomingEvents(observer: Observer, now: DateTime): EventRow[] {
-    // Populated by later phases: eclipses, meteor showers, celestial events.
-    return [];
+  private getUpcomingEvents(
+    observer: Observer,
+    now: DateTime,
+    flags: { showEclipses: boolean }
+  ): EventRow[] {
+    const events: EventRow[] = [];
+    if (flags.showEclipses) {
+      events.push(...this.getEclipseEventRows(observer, now));
+    }
+    // Populated by later phases: meteor showers, celestial events.
+    return events;
+  }
+
+  private getEclipseEventRows(observer: Observer, now: DateTime): EventRow[] {
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const locale = this.getLocale();
+    const eclipses = getUpcomingEclipses(observer, now.toJSDate());
+
+    return eclipses.map((eclipse) => this.buildEclipseRow(eclipse, timeZone, locale));
+  }
+
+  private buildEclipseRow(
+    eclipse: EclipseInfo,
+    timeZone: string,
+    locale: string
+  ): EventRow {
+    const typeKey: TranslationKey =
+      eclipse.type === "lunar" ? "eclipseTypes.lunar" : "eclipseTypes.solar";
+    const kindKey = `eclipseKinds.${eclipse.kind}` as TranslationKey;
+    const name = `${this._translate(typeKey)} — ${this._translate(kindKey)}`;
+
+    const lines: string[] = [];
+    if (eclipse.isCurrent) {
+      lines.push(this._translate("card.eclipseCurrent"));
+    }
+    lines.push(
+      `${this._translate(
+        "card.eclipseObscuration"
+      )}: ${(eclipse.obscuration * 100).toFixed(0)}%`
+    );
+    const beginStr = DateTime.fromJSDate(eclipse.begin)
+      .setZone(timeZone)
+      .toFormat("HH:mm", { locale });
+    const endStr = DateTime.fromJSDate(eclipse.end)
+      .setZone(timeZone)
+      .toFormat("HH:mm", { locale });
+    lines.push(`${beginStr} – ${endStr}`);
+
+    return {
+      category: "eclipse",
+      name,
+      date: eclipse.peak,
+      subtitle: lines.join("\n"),
+    };
   }
 
   private groupEventsByCategory(

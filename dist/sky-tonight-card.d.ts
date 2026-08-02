@@ -11,6 +11,8 @@ export declare class SkyTonightNativeCard extends LitElement {
     private getLocale;
     protected render(): TemplateResult;
     private getUpcomingEvents;
+    private getEclipseEventRows;
+    private buildEclipseRow;
     private groupEventsByCategory;
     private getCategoryLabelKey;
     private getAltitude;

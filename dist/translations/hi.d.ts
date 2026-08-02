@@ -15,6 +15,19 @@ export declare const hi: {
         readonly eclipses: "ग्रहण";
         readonly meteorShowers: "उल्का वर्षा";
         readonly celestialEvents: "खगोलीय घटनाएँ";
+        readonly eclipseObscuration: "अस्पष्टता";
+        readonly eclipsePeak: "चरम";
+        readonly eclipseCurrent: "अभी जारी है";
+    };
+    readonly eclipseKinds: {
+        readonly penumbral: "उपच्छाया";
+        readonly partial: "आंशिक";
+        readonly annular: "कंकणाकृति";
+        readonly total: "पूर्ण";
+    };
+    readonly eclipseTypes: {
+        readonly lunar: "चंद्र ग्रहण";
+        readonly solar: "सूर्य ग्रहण";
     };
     readonly objects: {
         readonly Sun: "सूर्य";

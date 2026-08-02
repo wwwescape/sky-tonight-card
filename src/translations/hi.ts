@@ -15,6 +15,19 @@ export const hi = {
     eclipses: "ग्रहण",
     meteorShowers: "उल्का वर्षा",
     celestialEvents: "खगोलीय घटनाएँ",
+    eclipseObscuration: "अस्पष्टता",
+    eclipsePeak: "चरम",
+    eclipseCurrent: "अभी जारी है",
+  },
+  eclipseKinds: {
+    penumbral: "उपच्छाया",
+    partial: "आंशिक",
+    annular: "कंकणाकृति",
+    total: "पूर्ण",
+  },
+  eclipseTypes: {
+    lunar: "चंद्र ग्रहण",
+    solar: "सूर्य ग्रहण",
   },
   objects: {
     Sun: "सूर्य",

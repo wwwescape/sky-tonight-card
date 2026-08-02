@@ -15,6 +15,19 @@ export declare const en: {
         readonly eclipses: "Eclipses";
         readonly meteorShowers: "Meteor Showers";
         readonly celestialEvents: "Celestial Events";
+        readonly eclipseObscuration: "Obscuration";
+        readonly eclipsePeak: "Peak";
+        readonly eclipseCurrent: "Currently in progress";
+    };
+    readonly eclipseKinds: {
+        readonly penumbral: "Penumbral";
+        readonly partial: "Partial";
+        readonly annular: "Annular";
+        readonly total: "Total";
+    };
+    readonly eclipseTypes: {
+        readonly lunar: "Lunar Eclipse";
+        readonly solar: "Solar Eclipse";
     };
     readonly objects: {
         readonly Sun: "Sun";
