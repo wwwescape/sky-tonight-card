@@ -54,7 +54,36 @@
 | showBelowHorizon      | boolean       | `false`                               | Set to true to display planetary bodies below the horizon as well                                                               |
 | showSun               | boolean       | `true`                                | Set to false to hide the Sun                                                                                                    |
 | showConfiguration     | boolean       | `true`                                | Set to false to hide the configuration section in the card                                                                      |
+| showEclipses          | boolean       | `true`                                | Set to false to hide upcoming lunar and local solar eclipses                                                                    |
+| showMeteorShowers     | boolean       | `true`                                | Set to false to hide active/upcoming meteor showers                                                                             |
+| showCelestialEvents   | boolean       | `true`                                | Set to false to hide equinoxes/solstices, planetary oppositions, greatest elongations, and supermoons                          |
 | colors                | object        |                                       | Object containing color overrides (see [Color Customization](#color-customization) below)                                       |
+
+### Upcoming Events
+
+When `showEclipses`, `showMeteorShowers`, or `showCelestialEvents` is enabled,
+the card adds a collapsible "Upcoming Events" section below the sun/moon/planet
+list, grouped by category:
+
+- **Eclipses** — the next lunar and local solar eclipses (the solar eclipse
+  search is already filtered to what's visible from the card's configured
+  latitude/longitude), with type, kind (penumbral/partial/annular/total),
+  obscuration %, and the begin–end time window. A currently-in-progress
+  eclipse is flagged as such.
+- **Meteor showers** — the 13 major annual showers (Quadrantids, Lyrids, Eta
+  Aquariids, Alpha Capricornids, Southern Delta Aquariids, Perseids,
+  Draconids, Southern Taurids, Orionids, Northern Taurids, Leonids, Geminids,
+  Ursids), shown when active or when their peak is within 60 days, along with
+  their zenith hourly rate (ZHR).
+- **Celestial events** — the next equinox/solstice, the next opposition for
+  each outer planet (Mars, Jupiter, Saturn, Uranus, Neptune), the next
+  greatest elongation for Mercury and Venus (with morning/evening
+  visibility), and any upcoming supermoons (full moons within ~360,000 km of
+  Earth).
+
+Each category looks ahead roughly 18 months and caps how many events it
+surfaces, so the section stays a reasonable length even though the
+underlying searches could otherwise return results far into the future.
 
 ### Color Customization
 
@@ -80,6 +109,9 @@ elevation: 10
 showBelowHorizon: false
 showSun: true
 showConfiguration: true
+showEclipses: true
+showMeteorShowers: true
+showCelestialEvents: true
 languageOverride: "en"
 colors:
   cardBackground: "#1b2431"

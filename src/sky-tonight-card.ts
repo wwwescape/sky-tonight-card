@@ -104,6 +104,7 @@ export class SkyTonightNativeCard extends LitElement {
     showBelowHorizon: false,
   };
   @state() private languageOverride?: LanguageCode;
+  private lastUpcomingEventCount = 0;
 
   static get styles() {
     return css`
@@ -323,6 +324,7 @@ export class SkyTonightNativeCard extends LitElement {
       showMeteorShowers,
     });
     const eventsByCategory = this.groupEventsByCategory(upcomingEvents);
+    this.lastUpcomingEventCount = upcomingEvents.length;
 
     const style = html`
       <style>
@@ -763,7 +765,14 @@ export class SkyTonightNativeCard extends LitElement {
   }
 
   public getCardSize(): number {
-    return 4;
+    const baseSize = 4;
+    if (this.lastUpcomingEventCount === 0) {
+      return baseSize;
+    }
+    // Account for the "Upcoming Events" section: one unit for the section
+    // itself, plus roughly half a grid unit per event row (each row is
+    // shorter than a celestial-object row, since it has no icon column).
+    return baseSize + 1 + Math.ceil(this.lastUpcomingEventCount / 2);
   }
 }
 
