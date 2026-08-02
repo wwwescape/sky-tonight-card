@@ -117,6 +117,8 @@ export declare const hi: {
     readonly languages: {
         readonly en: "अंग्रेज़ी";
         readonly hi: "हिंदी";
-        readonly fr: "फ्रेंच";
+        readonly fr: "फ़्रेंच";
+        readonly it: "इतालवी";
+        readonly de: "जर्मन";
     };
 };

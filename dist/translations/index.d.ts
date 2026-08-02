@@ -102,6 +102,9 @@ export declare const translations: {
             readonly showSun: "Show Sun";
             readonly showBelowHorizon: "Show objects below horizon";
             readonly showConfiguration: "Show configuration";
+            readonly showEclipses: "Show eclipses";
+            readonly showMeteorShowers: "Show meteor showers";
+            readonly showCelestialEvents: "Show celestial events";
             readonly colorCustomization: "Color Customization";
             readonly cardBackground: "Card Background";
             readonly cardTitle: "Card Title";
@@ -118,6 +121,8 @@ export declare const translations: {
             readonly en: "English";
             readonly hi: "Hindi";
             readonly fr: "French";
+            readonly it: "Italian";
+            readonly de: "German";
         };
     };
     readonly hi: {
@@ -221,6 +226,9 @@ export declare const translations: {
             readonly showSun: "सूर्य दिखाएँ";
             readonly showBelowHorizon: "क्षितिज के नीचे वस्तुएँ दिखाएँ";
             readonly showConfiguration: "कॉन्फ़िगरेशन दिखाएँ";
+            readonly showEclipses: "ग्रहण दिखाएँ";
+            readonly showMeteorShowers: "उल्का वर्षा दिखाएँ";
+            readonly showCelestialEvents: "खगोलीय घटनाएँ दिखाएँ";
             readonly colorCustomization: "रंग अनुकूलन";
             readonly cardBackground: "कार्ड पृष्ठभूमि";
             readonly cardTitle: "कार्ड शीर्षक";
@@ -236,7 +244,9 @@ export declare const translations: {
         readonly languages: {
             readonly en: "अंग्रेज़ी";
             readonly hi: "हिंदी";
-            readonly fr: "फ्रेंच";
+            readonly fr: "फ़्रेंच";
+            readonly it: "इतालवी";
+            readonly de: "जर्मन";
         };
     };
     readonly fr: {
@@ -340,6 +350,9 @@ export declare const translations: {
             readonly showSun: "Afficher le Soleil";
             readonly showBelowHorizon: "Afficher les objets sous l'horizon";
             readonly showConfiguration: "Afficher la configuration";
+            readonly showEclipses: "Afficher les éclipses";
+            readonly showMeteorShowers: "Afficher les pluies de météores";
+            readonly showCelestialEvents: "Afficher les événements célestes";
             readonly colorCustomization: "Personnalisation des couleurs";
             readonly cardBackground: "Fond de la carte";
             readonly cardTitle: "Titre de la carte";
@@ -356,6 +369,256 @@ export declare const translations: {
             readonly en: "Anglais";
             readonly hi: "Hindi";
             readonly fr: "Français";
+            readonly it: "Italien";
+            readonly de: "Allemand";
+        };
+    };
+    readonly it: {
+        readonly card: {
+            readonly title: "Il Cielo Stanotte";
+            readonly latitude: "Latitudine";
+            readonly longitude: "Longitudine";
+            readonly elevation: "Altitudine";
+            readonly moonPhase: "Fase Lunare";
+            readonly visible: "Visibile";
+            readonly duration: "Durata";
+            readonly altitude: "Altitudine";
+            readonly nakedEye: "Ad Occhio Nudo";
+            readonly binocular: "Binocolo";
+            readonly telescope: "Telescopio";
+            readonly upcomingEvents: "Eventi in Arrivo";
+            readonly eclipses: "Eclissi";
+            readonly meteorShowers: "Sciami Meteorici";
+            readonly celestialEvents: "Eventi Celesti";
+            readonly eclipseObscuration: "Oscuramento";
+            readonly eclipsePeak: "Picco";
+            readonly eclipseCurrent: "Attualmente in corso";
+            readonly visibility: "Visibilità";
+            readonly morning: "Mattina";
+            readonly evening: "Sera";
+            readonly distance: "Distanza";
+            readonly zhr: "ZHR";
+            readonly peakDate: "Data del Picco";
+            readonly active: "Attivo ora";
+        };
+        readonly eclipseKinds: {
+            readonly penumbral: "Penombrale";
+            readonly partial: "Parziale";
+            readonly annular: "Anulare";
+            readonly total: "Totale";
+        };
+        readonly eclipseTypes: {
+            readonly lunar: "Eclissi Lunare";
+            readonly solar: "Eclissi Solare";
+        };
+        readonly events: {
+            readonly equinox: "Equinozio";
+            readonly solstice: "Solstizio";
+            readonly opposition: "Opposizione";
+            readonly greatestElongation: "Massima Elongazione";
+            readonly supermoon: "Superluna";
+        };
+        readonly showers: {
+            readonly Quadrantids: "Quadrantidi";
+            readonly Lyrids: "Liridi";
+            readonly "Eta Aquariids": "Eta Acquaridi";
+            readonly "Alpha Capricornids": "Alfa Capricornidi";
+            readonly "Southern Delta Aquariids": "Delta Acquaridi Australi";
+            readonly Perseids: "Perseidi";
+            readonly Draconids: "Draconidi";
+            readonly "Southern Taurids": "Tauridi Australi";
+            readonly Orionids: "Orionidi";
+            readonly "Northern Taurids": "Tauridi Boreali";
+            readonly Leonids: "Leonidi";
+            readonly Geminids: "Geminidi";
+            readonly Ursids: "Ursidi";
+        };
+        readonly objects: {
+            readonly Sun: "Sole";
+            readonly Moon: "Luna";
+            readonly Mercury: "Mercurio";
+            readonly Venus: "Venere";
+            readonly Mars: "Marte";
+            readonly Jupiter: "Giove";
+            readonly Saturn: "Saturno";
+            readonly Uranus: "Urano";
+            readonly Neptune: "Nettuno";
+            readonly Pluto: "Plutone";
+        };
+        readonly moonPhases: {
+            readonly "New Moon": "Luna Nuova";
+            readonly "Waxing Crescent": "Luna Crescente";
+            readonly "First Quarter": "Primo Quarto";
+            readonly "Waxing Gibbous": "Gibbosa Crescente";
+            readonly "Full Moon": "Luna Piena";
+            readonly "Waning Gibbous": "Gibbosa Calante";
+            readonly "Last Quarter": "Ultimo Quarto";
+            readonly "Waning Crescent": "Luna Calante";
+        };
+        readonly types: {
+            readonly Star: "Stella";
+            readonly Planet: "Pianeta";
+            readonly Moon: "Luna";
+        };
+        readonly time: {
+            readonly h: "h";
+            readonly m: "min";
+        };
+        readonly editor: {
+            readonly latitude: "Latitudine";
+            readonly longitude: "Longitudine";
+            readonly elevation: "Altitudine";
+            readonly elevationUnit: "metri";
+            readonly languageOverride: "Sovrascrivi lingua";
+            readonly useHASetting: "Usa impostazioni HA";
+            readonly showSun: "Mostra Sole";
+            readonly showBelowHorizon: "Mostra oggetti sotto l'orizzonte";
+            readonly showConfiguration: "Mostra configurazione";
+            readonly showEclipses: "Mostra eclissi";
+            readonly showMeteorShowers: "Mostra sciami meteorici";
+            readonly showCelestialEvents: "Mostra eventi celesti";
+            readonly colorCustomization: "Personalizzazione colori";
+            readonly cardBackground: "Sfondo scheda";
+            readonly cardTitle: "Titolo scheda";
+            readonly objectBackground: "Sfondo oggetto";
+            readonly objectName: "Nome oggetto";
+            readonly objectData: "Dati oggetto";
+            readonly objectType: "Tipo di oggetto";
+            readonly reset: "Reimposta";
+            readonly optional: "opzionale";
+            readonly yes: "Sì";
+            readonly no: "No";
+        };
+        readonly languages: {
+            readonly en: "Inglese";
+            readonly hi: "Hindi";
+            readonly fr: "Francese";
+            readonly it: "Italiano";
+            readonly de: "Tedesco";
+        };
+    };
+    readonly de: {
+        readonly card: {
+            readonly title: "Sky Tonight";
+            readonly latitude: "Breitengrad";
+            readonly longitude: "Längengrad";
+            readonly elevation: "Höhe";
+            readonly moonPhase: "Mondphase";
+            readonly visible: "Sichtbar";
+            readonly duration: "Dauer";
+            readonly altitude: "Höhenwinkel";
+            readonly nakedEye: "Mit bloßem Auge";
+            readonly binocular: "Fernglas";
+            readonly telescope: "Teleskop";
+            readonly upcomingEvents: "Bevorstehende Ereignisse";
+            readonly eclipses: "Finsternisse";
+            readonly meteorShowers: "Meteorschauer";
+            readonly celestialEvents: "Himmelsereignisse";
+            readonly eclipseObscuration: "Verdunkelung";
+            readonly eclipsePeak: "Höhepunkt";
+            readonly eclipseCurrent: "Derzeit im Gange";
+            readonly visibility: "Sichtbarkeit";
+            readonly morning: "Morgens";
+            readonly evening: "Abends";
+            readonly distance: "Entfernung";
+            readonly zhr: "ZHR";
+            readonly peakDate: "Höhepunktdatum";
+            readonly active: "Derzeit aktiv";
+        };
+        readonly eclipseKinds: {
+            readonly penumbral: "Halbschatten";
+            readonly partial: "Partiell";
+            readonly annular: "Ringförmig";
+            readonly total: "Total";
+        };
+        readonly eclipseTypes: {
+            readonly lunar: "Mondfinsternis";
+            readonly solar: "Sonnenfinsternis";
+        };
+        readonly events: {
+            readonly equinox: "Tagundnachtgleiche";
+            readonly solstice: "Sonnenwende";
+            readonly opposition: "Opposition";
+            readonly greatestElongation: "Größte Elongation";
+            readonly supermoon: "Supermond";
+        };
+        readonly showers: {
+            readonly Quadrantids: "Quadrantiden";
+            readonly Lyrids: "Lyriden";
+            readonly "Eta Aquariids": "Eta-Aquariiden";
+            readonly "Alpha Capricornids": "Alpha-Capricorniden";
+            readonly "Southern Delta Aquariids": "Südliche Delta-Aquariiden";
+            readonly Perseids: "Perseiden";
+            readonly Draconids: "Draconiden";
+            readonly "Southern Taurids": "Südliche Tauriden";
+            readonly Orionids: "Orioniden";
+            readonly "Northern Taurids": "Nördliche Tauriden";
+            readonly Leonids: "Leoniden";
+            readonly Geminids: "Geminiden";
+            readonly Ursids: "Ursiden";
+        };
+        readonly objects: {
+            readonly Sun: "Sonne";
+            readonly Moon: "Mond";
+            readonly Mercury: "Merkur";
+            readonly Venus: "Venus";
+            readonly Mars: "Mars";
+            readonly Jupiter: "Jupiter";
+            readonly Saturn: "Saturn";
+            readonly Uranus: "Uranus";
+            readonly Neptune: "Neptun";
+            readonly Pluto: "Pluto";
+        };
+        readonly moonPhases: {
+            readonly "New Moon": "Neumond";
+            readonly "Waxing Crescent": "Zunehmende Sichel";
+            readonly "First Quarter": "Erstes Viertel";
+            readonly "Waxing Gibbous": "Zunehmender Mond";
+            readonly "Full Moon": "Vollmond";
+            readonly "Waning Gibbous": "Abnehmender Mond";
+            readonly "Last Quarter": "Letztes Viertel";
+            readonly "Waning Crescent": "Abnehmende Sichel";
+        };
+        readonly types: {
+            readonly Star: "Stern";
+            readonly Planet: "Planet";
+            readonly Moon: "Mond";
+        };
+        readonly time: {
+            readonly h: "h";
+            readonly m: "m";
+        };
+        readonly editor: {
+            readonly latitude: "Breitengrad";
+            readonly longitude: "Längengrad";
+            readonly elevation: "Höhe";
+            readonly elevationUnit: "Meter";
+            readonly languageOverride: "Sprache überschreiben";
+            readonly useHASetting: "HA-Einstellung verwenden";
+            readonly showSun: "Sonne anzeigen";
+            readonly showBelowHorizon: "Objekte unter dem Horizont anzeigen";
+            readonly showConfiguration: "Konfiguration anzeigen";
+            readonly showEclipses: "Finsternisse anzeigen";
+            readonly showMeteorShowers: "Meteorschauer anzeigen";
+            readonly showCelestialEvents: "Himmelsereignisse anzeigen";
+            readonly colorCustomization: "Farb-Anpassung";
+            readonly cardBackground: "Kartenhintergrund";
+            readonly cardTitle: "Kartentitel";
+            readonly objectBackground: "Objekthintergrund";
+            readonly objectName: "Objektname";
+            readonly objectData: "Objektdaten";
+            readonly objectType: "Objekttyp";
+            readonly reset: "Zurücksetzen";
+            readonly optional: "optional";
+            readonly yes: "Ja";
+            readonly no: "Nein";
+        };
+        readonly languages: {
+            readonly en: "Englisch";
+            readonly hi: "Hindi";
+            readonly fr: "Französisch";
+            readonly it: "Italienisch";
+            readonly de: "Deutsch";
         };
     };
 };

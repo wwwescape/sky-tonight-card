@@ -1,0 +1,124 @@
+export declare const de: {
+    readonly card: {
+        readonly title: "Sky Tonight";
+        readonly latitude: "Breitengrad";
+        readonly longitude: "Längengrad";
+        readonly elevation: "Höhe";
+        readonly moonPhase: "Mondphase";
+        readonly visible: "Sichtbar";
+        readonly duration: "Dauer";
+        readonly altitude: "Höhenwinkel";
+        readonly nakedEye: "Mit bloßem Auge";
+        readonly binocular: "Fernglas";
+        readonly telescope: "Teleskop";
+        readonly upcomingEvents: "Bevorstehende Ereignisse";
+        readonly eclipses: "Finsternisse";
+        readonly meteorShowers: "Meteorschauer";
+        readonly celestialEvents: "Himmelsereignisse";
+        readonly eclipseObscuration: "Verdunkelung";
+        readonly eclipsePeak: "Höhepunkt";
+        readonly eclipseCurrent: "Derzeit im Gange";
+        readonly visibility: "Sichtbarkeit";
+        readonly morning: "Morgens";
+        readonly evening: "Abends";
+        readonly distance: "Entfernung";
+        readonly zhr: "ZHR";
+        readonly peakDate: "Höhepunktdatum";
+        readonly active: "Derzeit aktiv";
+    };
+    readonly eclipseKinds: {
+        readonly penumbral: "Halbschatten";
+        readonly partial: "Partiell";
+        readonly annular: "Ringförmig";
+        readonly total: "Total";
+    };
+    readonly eclipseTypes: {
+        readonly lunar: "Mondfinsternis";
+        readonly solar: "Sonnenfinsternis";
+    };
+    readonly events: {
+        readonly equinox: "Tagundnachtgleiche";
+        readonly solstice: "Sonnenwende";
+        readonly opposition: "Opposition";
+        readonly greatestElongation: "Größte Elongation";
+        readonly supermoon: "Supermond";
+    };
+    readonly showers: {
+        readonly Quadrantids: "Quadrantiden";
+        readonly Lyrids: "Lyriden";
+        readonly "Eta Aquariids": "Eta-Aquariiden";
+        readonly "Alpha Capricornids": "Alpha-Capricorniden";
+        readonly "Southern Delta Aquariids": "Südliche Delta-Aquariiden";
+        readonly Perseids: "Perseiden";
+        readonly Draconids: "Draconiden";
+        readonly "Southern Taurids": "Südliche Tauriden";
+        readonly Orionids: "Orioniden";
+        readonly "Northern Taurids": "Nördliche Tauriden";
+        readonly Leonids: "Leoniden";
+        readonly Geminids: "Geminiden";
+        readonly Ursids: "Ursiden";
+    };
+    readonly objects: {
+        readonly Sun: "Sonne";
+        readonly Moon: "Mond";
+        readonly Mercury: "Merkur";
+        readonly Venus: "Venus";
+        readonly Mars: "Mars";
+        readonly Jupiter: "Jupiter";
+        readonly Saturn: "Saturn";
+        readonly Uranus: "Uranus";
+        readonly Neptune: "Neptun";
+        readonly Pluto: "Pluto";
+    };
+    readonly moonPhases: {
+        readonly "New Moon": "Neumond";
+        readonly "Waxing Crescent": "Zunehmende Sichel";
+        readonly "First Quarter": "Erstes Viertel";
+        readonly "Waxing Gibbous": "Zunehmender Mond";
+        readonly "Full Moon": "Vollmond";
+        readonly "Waning Gibbous": "Abnehmender Mond";
+        readonly "Last Quarter": "Letztes Viertel";
+        readonly "Waning Crescent": "Abnehmende Sichel";
+    };
+    readonly types: {
+        readonly Star: "Stern";
+        readonly Planet: "Planet";
+        readonly Moon: "Mond";
+    };
+    readonly time: {
+        readonly h: "h";
+        readonly m: "m";
+    };
+    readonly editor: {
+        readonly latitude: "Breitengrad";
+        readonly longitude: "Längengrad";
+        readonly elevation: "Höhe";
+        readonly elevationUnit: "Meter";
+        readonly languageOverride: "Sprache überschreiben";
+        readonly useHASetting: "HA-Einstellung verwenden";
+        readonly showSun: "Sonne anzeigen";
+        readonly showBelowHorizon: "Objekte unter dem Horizont anzeigen";
+        readonly showConfiguration: "Konfiguration anzeigen";
+        readonly showEclipses: "Finsternisse anzeigen";
+        readonly showMeteorShowers: "Meteorschauer anzeigen";
+        readonly showCelestialEvents: "Himmelsereignisse anzeigen";
+        readonly colorCustomization: "Farb-Anpassung";
+        readonly cardBackground: "Kartenhintergrund";
+        readonly cardTitle: "Kartentitel";
+        readonly objectBackground: "Objekthintergrund";
+        readonly objectName: "Objektname";
+        readonly objectData: "Objektdaten";
+        readonly objectType: "Objekttyp";
+        readonly reset: "Zurücksetzen";
+        readonly optional: "optional";
+        readonly yes: "Ja";
+        readonly no: "Nein";
+    };
+    readonly languages: {
+        readonly en: "Englisch";
+        readonly hi: "Hindi";
+        readonly fr: "Französisch";
+        readonly it: "Italienisch";
+        readonly de: "Deutsch";
+    };
+};

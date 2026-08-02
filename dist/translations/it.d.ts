@@ -1,0 +1,124 @@
+export declare const it: {
+    readonly card: {
+        readonly title: "Il Cielo Stanotte";
+        readonly latitude: "Latitudine";
+        readonly longitude: "Longitudine";
+        readonly elevation: "Altitudine";
+        readonly moonPhase: "Fase Lunare";
+        readonly visible: "Visibile";
+        readonly duration: "Durata";
+        readonly altitude: "Altitudine";
+        readonly nakedEye: "Ad Occhio Nudo";
+        readonly binocular: "Binocolo";
+        readonly telescope: "Telescopio";
+        readonly upcomingEvents: "Eventi in Arrivo";
+        readonly eclipses: "Eclissi";
+        readonly meteorShowers: "Sciami Meteorici";
+        readonly celestialEvents: "Eventi Celesti";
+        readonly eclipseObscuration: "Oscuramento";
+        readonly eclipsePeak: "Picco";
+        readonly eclipseCurrent: "Attualmente in corso";
+        readonly visibility: "Visibilità";
+        readonly morning: "Mattina";
+        readonly evening: "Sera";
+        readonly distance: "Distanza";
+        readonly zhr: "ZHR";
+        readonly peakDate: "Data del Picco";
+        readonly active: "Attivo ora";
+    };
+    readonly eclipseKinds: {
+        readonly penumbral: "Penombrale";
+        readonly partial: "Parziale";
+        readonly annular: "Anulare";
+        readonly total: "Totale";
+    };
+    readonly eclipseTypes: {
+        readonly lunar: "Eclissi Lunare";
+        readonly solar: "Eclissi Solare";
+    };
+    readonly events: {
+        readonly equinox: "Equinozio";
+        readonly solstice: "Solstizio";
+        readonly opposition: "Opposizione";
+        readonly greatestElongation: "Massima Elongazione";
+        readonly supermoon: "Superluna";
+    };
+    readonly showers: {
+        readonly Quadrantids: "Quadrantidi";
+        readonly Lyrids: "Liridi";
+        readonly "Eta Aquariids": "Eta Acquaridi";
+        readonly "Alpha Capricornids": "Alfa Capricornidi";
+        readonly "Southern Delta Aquariids": "Delta Acquaridi Australi";
+        readonly Perseids: "Perseidi";
+        readonly Draconids: "Draconidi";
+        readonly "Southern Taurids": "Tauridi Australi";
+        readonly Orionids: "Orionidi";
+        readonly "Northern Taurids": "Tauridi Boreali";
+        readonly Leonids: "Leonidi";
+        readonly Geminids: "Geminidi";
+        readonly Ursids: "Ursidi";
+    };
+    readonly objects: {
+        readonly Sun: "Sole";
+        readonly Moon: "Luna";
+        readonly Mercury: "Mercurio";
+        readonly Venus: "Venere";
+        readonly Mars: "Marte";
+        readonly Jupiter: "Giove";
+        readonly Saturn: "Saturno";
+        readonly Uranus: "Urano";
+        readonly Neptune: "Nettuno";
+        readonly Pluto: "Plutone";
+    };
+    readonly moonPhases: {
+        readonly "New Moon": "Luna Nuova";
+        readonly "Waxing Crescent": "Luna Crescente";
+        readonly "First Quarter": "Primo Quarto";
+        readonly "Waxing Gibbous": "Gibbosa Crescente";
+        readonly "Full Moon": "Luna Piena";
+        readonly "Waning Gibbous": "Gibbosa Calante";
+        readonly "Last Quarter": "Ultimo Quarto";
+        readonly "Waning Crescent": "Luna Calante";
+    };
+    readonly types: {
+        readonly Star: "Stella";
+        readonly Planet: "Pianeta";
+        readonly Moon: "Luna";
+    };
+    readonly time: {
+        readonly h: "h";
+        readonly m: "min";
+    };
+    readonly editor: {
+        readonly latitude: "Latitudine";
+        readonly longitude: "Longitudine";
+        readonly elevation: "Altitudine";
+        readonly elevationUnit: "metri";
+        readonly languageOverride: "Sovrascrivi lingua";
+        readonly useHASetting: "Usa impostazioni HA";
+        readonly showSun: "Mostra Sole";
+        readonly showBelowHorizon: "Mostra oggetti sotto l'orizzonte";
+        readonly showConfiguration: "Mostra configurazione";
+        readonly showEclipses: "Mostra eclissi";
+        readonly showMeteorShowers: "Mostra sciami meteorici";
+        readonly showCelestialEvents: "Mostra eventi celesti";
+        readonly colorCustomization: "Personalizzazione colori";
+        readonly cardBackground: "Sfondo scheda";
+        readonly cardTitle: "Titolo scheda";
+        readonly objectBackground: "Sfondo oggetto";
+        readonly objectName: "Nome oggetto";
+        readonly objectData: "Dati oggetto";
+        readonly objectType: "Tipo di oggetto";
+        readonly reset: "Reimposta";
+        readonly optional: "opzionale";
+        readonly yes: "Sì";
+        readonly no: "No";
+    };
+    readonly languages: {
+        readonly en: "Inglese";
+        readonly hi: "Hindi";
+        readonly fr: "Francese";
+        readonly it: "Italiano";
+        readonly de: "Tedesco";
+    };
+};

@@ -118,5 +118,7 @@ export declare const en: {
         readonly en: "English";
         readonly hi: "Hindi";
         readonly fr: "French";
+        readonly it: "Italian";
+        readonly de: "German";
     };
 };
