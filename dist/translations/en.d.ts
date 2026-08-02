@@ -99,6 +99,9 @@ export declare const en: {
         readonly showSun: "Show Sun";
         readonly showBelowHorizon: "Show objects below horizon";
         readonly showConfiguration: "Show configuration";
+        readonly showEclipses: "Show eclipses";
+        readonly showMeteorShowers: "Show meteor showers";
+        readonly showCelestialEvents: "Show celestial events";
         readonly colorCustomization: "Color Customization";
         readonly cardBackground: "Card Background";
         readonly cardTitle: "Card Title";

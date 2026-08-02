@@ -99,6 +99,9 @@ export declare const hi: {
         readonly showSun: "सूर्य दिखाएँ";
         readonly showBelowHorizon: "क्षितिज के नीचे वस्तुएँ दिखाएँ";
         readonly showConfiguration: "कॉन्फ़िगरेशन दिखाएँ";
+        readonly showEclipses: "ग्रहण दिखाएँ";
+        readonly showMeteorShowers: "उल्का वर्षा दिखाएँ";
+        readonly showCelestialEvents: "खगोलीय घटनाएँ दिखाएँ";
         readonly colorCustomization: "रंग अनुकूलन";
         readonly cardBackground: "कार्ड पृष्ठभूमि";
         readonly cardTitle: "कार्ड शीर्षक";

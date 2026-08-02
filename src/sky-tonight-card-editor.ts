@@ -126,6 +126,15 @@ export class SkyTonightNativeCardEditor extends LitElement {
     if (this._config.showConfiguration === undefined) {
       this._config.showConfiguration = true;
     }
+    if (this._config.showEclipses === undefined) {
+      this._config.showEclipses = true;
+    }
+    if (this._config.showMeteorShowers === undefined) {
+      this._config.showMeteorShowers = true;
+    }
+    if (this._config.showCelestialEvents === undefined) {
+      this._config.showCelestialEvents = true;
+    }
 
     return html`
       <div class="card-config">
@@ -300,6 +309,96 @@ export class SkyTonightNativeCardEditor extends LitElement {
                 .checked=${this._config.showConfiguration === false}
                 @change=${() => {
                   this._config.showConfiguration = false;
+                  fireEvent(this, "config-changed", { config: this._config });
+                }}
+              />
+              ${this._translate("editor.no")}
+            </label>
+          </div>
+        </div>
+
+        <div class="config-row">
+          <label>${this._translate("editor.showEclipses")}:</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input
+                type="radio"
+                name="showEclipses"
+                .checked=${this._config.showEclipses !== false}
+                @change=${() => {
+                  this._config.showEclipses = true;
+                  fireEvent(this, "config-changed", { config: this._config });
+                }}
+              />
+              ${this._translate("editor.yes")}
+            </label>
+            <label class="radio-option">
+              <input
+                type="radio"
+                name="showEclipses"
+                .checked=${this._config.showEclipses === false}
+                @change=${() => {
+                  this._config.showEclipses = false;
+                  fireEvent(this, "config-changed", { config: this._config });
+                }}
+              />
+              ${this._translate("editor.no")}
+            </label>
+          </div>
+        </div>
+
+        <div class="config-row">
+          <label>${this._translate("editor.showMeteorShowers")}:</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input
+                type="radio"
+                name="showMeteorShowers"
+                .checked=${this._config.showMeteorShowers !== false}
+                @change=${() => {
+                  this._config.showMeteorShowers = true;
+                  fireEvent(this, "config-changed", { config: this._config });
+                }}
+              />
+              ${this._translate("editor.yes")}
+            </label>
+            <label class="radio-option">
+              <input
+                type="radio"
+                name="showMeteorShowers"
+                .checked=${this._config.showMeteorShowers === false}
+                @change=${() => {
+                  this._config.showMeteorShowers = false;
+                  fireEvent(this, "config-changed", { config: this._config });
+                }}
+              />
+              ${this._translate("editor.no")}
+            </label>
+          </div>
+        </div>
+
+        <div class="config-row">
+          <label>${this._translate("editor.showCelestialEvents")}:</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input
+                type="radio"
+                name="showCelestialEvents"
+                .checked=${this._config.showCelestialEvents !== false}
+                @change=${() => {
+                  this._config.showCelestialEvents = true;
+                  fireEvent(this, "config-changed", { config: this._config });
+                }}
+              />
+              ${this._translate("editor.yes")}
+            </label>
+            <label class="radio-option">
+              <input
+                type="radio"
+                name="showCelestialEvents"
+                .checked=${this._config.showCelestialEvents === false}
+                @change=${() => {
+                  this._config.showCelestialEvents = false;
                   fireEvent(this, "config-changed", { config: this._config });
                 }}
               />

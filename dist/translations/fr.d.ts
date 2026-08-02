@@ -99,6 +99,9 @@ export declare const fr: {
         readonly showSun: "Afficher le Soleil";
         readonly showBelowHorizon: "Afficher les objets sous l'horizon";
         readonly showConfiguration: "Afficher la configuration";
+        readonly showEclipses: "Afficher les éclipses";
+        readonly showMeteorShowers: "Afficher les pluies de météores";
+        readonly showCelestialEvents: "Afficher les événements célestes";
         readonly colorCustomization: "Personnalisation des couleurs";
         readonly cardBackground: "Fond de la carte";
         readonly cardTitle: "Titre de la carte";
