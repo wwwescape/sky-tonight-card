@@ -11,6 +11,10 @@ export const hi = {
     nakedEye: "नंगी आँखों से",
     binocular: "दूरबीन से",
     telescope: "दूरदर्शी से",
+    upcomingEvents: "आगामी घटनाएँ",
+    eclipses: "ग्रहण",
+    meteorShowers: "उल्का वर्षा",
+    celestialEvents: "खगोलीय घटनाएँ",
   },
   objects: {
     Sun: "सूर्य",

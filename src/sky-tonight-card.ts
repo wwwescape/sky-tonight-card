@@ -10,6 +10,7 @@ import {
 } from "astronomy-engine";
 import { DateTime } from "luxon";
 import { translations, TranslationKey, LanguageCode } from "./translations";
+import { EventCategory, EventRow } from "./event-types";
 import "./sky-tonight-card-editor";
 
 type CelestialObjectInfo = {
@@ -185,6 +186,27 @@ export class SkyTonightNativeCard extends LitElement {
       .location-info div {
         margin: 4px 0;
       }
+
+      .events-section {
+        margin-top: 16px;
+      }
+
+      .events-section summary {
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--card-text-color, #ffffff);
+      }
+
+      .event-category {
+        margin-top: 12px;
+      }
+
+      .event-category h3 {
+        margin: 0 0 8px;
+        font-size: 0.95rem;
+        color: var(--object-type-color, #aaaaaa);
+      }
     `;
   }
 
@@ -276,6 +298,9 @@ export class SkyTonightNativeCard extends LitElement {
       .sort((a, b) => a.rise.toMillis() - b.rise.toMillis());
 
     const moonPhase = this.getMoonPhase(now.toJSDate());
+
+    const upcomingEvents = this.getUpcomingEvents(observer, now);
+    const eventsByCategory = this.groupEventsByCategory(upcomingEvents);
 
     const style = html`
       <style>
@@ -394,8 +419,75 @@ export class SkyTonightNativeCard extends LitElement {
             `
           )}
         </div>
+        ${eventsByCategory.size > 0
+          ? html`
+              <details class="events-section" open>
+                <summary>${this._translate("card.upcomingEvents")}</summary>
+                ${Array.from(eventsByCategory.entries()).map(
+                  ([category, events]) => html`
+                    <div class="event-category">
+                      <h3>
+                        ${this._translate(this.getCategoryLabelKey(category))}
+                      </h3>
+                      <div class="astro-list">
+                        ${events.map(
+                          (event) => html`
+                            <div class="astro-card">
+                              <div class="astro-info">
+                                <div class="astro-name">${event.name}</div>
+                                ${event.subtitle
+                                  ? html`<div class="astro-data">
+                                      ${event.subtitle}
+                                    </div>`
+                                  : ""}
+                                <div class="astro-data">
+                                  ${DateTime.fromJSDate(
+                                    event.date
+                                  ).toFormat("MMM dd HH:mm", {
+                                    locale: this.getLocale(),
+                                  })}
+                                </div>
+                              </div>
+                            </div>
+                          `
+                        )}
+                      </div>
+                    </div>
+                  `
+                )}
+              </details>
+            `
+          : ""}
       </ha-card>
     `;
+  }
+
+  private getUpcomingEvents(observer: Observer, now: DateTime): EventRow[] {
+    // Populated by later phases: eclipses, meteor showers, celestial events.
+    return [];
+  }
+
+  private groupEventsByCategory(
+    events: EventRow[]
+  ): Map<EventCategory, EventRow[]> {
+    const map = new Map<EventCategory, EventRow[]>();
+    for (const event of events) {
+      const list = map.get(event.category) ?? [];
+      list.push(event);
+      map.set(event.category, list);
+    }
+    return map;
+  }
+
+  private getCategoryLabelKey(category: EventCategory): TranslationKey {
+    switch (category) {
+      case "eclipse":
+        return "card.eclipses";
+      case "meteorShower":
+        return "card.meteorShowers";
+      case "celestialEvent":
+        return "card.celestialEvents";
+    }
   }
 
   private getAltitude(

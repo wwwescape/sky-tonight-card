@@ -11,6 +11,10 @@ export declare const en: {
         readonly nakedEye: "Naked Eye";
         readonly binocular: "Binocular";
         readonly telescope: "Telescope";
+        readonly upcomingEvents: "Upcoming Events";
+        readonly eclipses: "Eclipses";
+        readonly meteorShowers: "Meteor Showers";
+        readonly celestialEvents: "Celestial Events";
     };
     readonly objects: {
         readonly Sun: "Sun";

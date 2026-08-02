@@ -11,6 +11,10 @@ export const fr = {
     nakedEye: "À l'œil nu",
     binocular: "Jumelles",
     telescope: "Télescope",
+    upcomingEvents: "Événements à venir",
+    eclipses: "Éclipses",
+    meteorShowers: "Pluies de météores",
+    celestialEvents: "Événements célestes",
   },
   objects: {
     Sun: "Soleil",

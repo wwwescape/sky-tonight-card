@@ -11,6 +11,10 @@ export declare const hi: {
         readonly nakedEye: "नंगी आँखों से";
         readonly binocular: "दूरबीन से";
         readonly telescope: "दूरदर्शी से";
+        readonly upcomingEvents: "आगामी घटनाएँ";
+        readonly eclipses: "ग्रहण";
+        readonly meteorShowers: "उल्का वर्षा";
+        readonly celestialEvents: "खगोलीय घटनाएँ";
     };
     readonly objects: {
         readonly Sun: "सूर्य";

@@ -11,6 +11,10 @@ export const en = {
     nakedEye: "Naked Eye",
     binocular: "Binocular",
     telescope: "Telescope",
+    upcomingEvents: "Upcoming Events",
+    eclipses: "Eclipses",
+    meteorShowers: "Meteor Showers",
+    celestialEvents: "Celestial Events",
   },
   objects: {
     Sun: "Sun",

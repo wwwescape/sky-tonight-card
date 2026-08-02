@@ -10,6 +10,9 @@ export declare class SkyTonightNativeCard extends LitElement {
     static getConfigElement(): HTMLElement;
     private getLocale;
     protected render(): TemplateResult;
+    private getUpcomingEvents;
+    private groupEventsByCategory;
+    private getCategoryLabelKey;
     private getAltitude;
     private getRiseSet;
     private calculateDuration;

@@ -14,6 +14,10 @@ export declare const translations: {
             readonly nakedEye: "Naked Eye";
             readonly binocular: "Binocular";
             readonly telescope: "Telescope";
+            readonly upcomingEvents: "Upcoming Events";
+            readonly eclipses: "Eclipses";
+            readonly meteorShowers: "Meteor Showers";
+            readonly celestialEvents: "Celestial Events";
         };
         readonly objects: {
             readonly Sun: "Sun";
@@ -47,7 +51,6 @@ export declare const translations: {
             readonly m: "m";
         };
         readonly editor: {
-            readonly title: "Sky Tonight Card Editor";
             readonly latitude: "Latitude";
             readonly longitude: "Longitude";
             readonly elevation: "Elevation";
@@ -88,6 +91,10 @@ export declare const translations: {
             readonly nakedEye: "नंगी आँखों से";
             readonly binocular: "दूरबीन से";
             readonly telescope: "दूरदर्शी से";
+            readonly upcomingEvents: "आगामी घटनाएँ";
+            readonly eclipses: "ग्रहण";
+            readonly meteorShowers: "उल्का वर्षा";
+            readonly celestialEvents: "खगोलीय घटनाएँ";
         };
         readonly objects: {
             readonly Sun: "सूर्य";
@@ -121,7 +128,6 @@ export declare const translations: {
             readonly m: "मि";
         };
         readonly editor: {
-            readonly title: "आज का आकाश कार्ड संपादक";
             readonly latitude: "अक्षांश";
             readonly longitude: "देशांतर";
             readonly elevation: "ऊँचाई";
@@ -162,6 +168,10 @@ export declare const translations: {
             readonly nakedEye: "À l'œil nu";
             readonly binocular: "Jumelles";
             readonly telescope: "Télescope";
+            readonly upcomingEvents: "Événements à venir";
+            readonly eclipses: "Éclipses";
+            readonly meteorShowers: "Pluies de météores";
+            readonly celestialEvents: "Événements célestes";
         };
         readonly objects: {
             readonly Sun: "Soleil";
@@ -195,7 +205,6 @@ export declare const translations: {
             readonly m: "m";
         };
         readonly editor: {
-            readonly title: "Éditeur de Carte Ciel Ce Soir";
             readonly latitude: "Latitude";
             readonly longitude: "Longitude";
             readonly elevation: "Élévation";
