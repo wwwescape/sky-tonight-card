@@ -1,5 +1,5 @@
 import { en } from "./en";
-export type TranslationKey = `card.${keyof typeof en.card}` | `objects.${keyof typeof en.objects}` | `moonPhases.${keyof typeof en.moonPhases}` | `types.${keyof typeof en.types}` | `time.${keyof typeof en.time}` | `editor.${keyof typeof en.editor}` | `languages.${keyof typeof en.languages}` | `eclipseKinds.${keyof typeof en.eclipseKinds}` | `eclipseTypes.${keyof typeof en.eclipseTypes}` | `events.${keyof typeof en.events}`;
+export type TranslationKey = `card.${keyof typeof en.card}` | `objects.${keyof typeof en.objects}` | `moonPhases.${keyof typeof en.moonPhases}` | `types.${keyof typeof en.types}` | `time.${keyof typeof en.time}` | `editor.${keyof typeof en.editor}` | `languages.${keyof typeof en.languages}` | `eclipseKinds.${keyof typeof en.eclipseKinds}` | `eclipseTypes.${keyof typeof en.eclipseTypes}` | `events.${keyof typeof en.events}` | `showers.${keyof typeof en.showers}`;
 export declare const translations: {
     readonly en: {
         readonly card: {
@@ -25,6 +25,9 @@ export declare const translations: {
             readonly morning: "Morning";
             readonly evening: "Evening";
             readonly distance: "Distance";
+            readonly zhr: "ZHR";
+            readonly peakDate: "Peak Date";
+            readonly active: "Active now";
         };
         readonly eclipseKinds: {
             readonly penumbral: "Penumbral";
@@ -42,6 +45,21 @@ export declare const translations: {
             readonly opposition: "Opposition";
             readonly greatestElongation: "Greatest Elongation";
             readonly supermoon: "Supermoon";
+        };
+        readonly showers: {
+            readonly Quadrantids: "Quadrantids";
+            readonly Lyrids: "Lyrids";
+            readonly "Eta Aquariids": "Eta Aquariids";
+            readonly "Alpha Capricornids": "Alpha Capricornids";
+            readonly "Southern Delta Aquariids": "Southern Delta Aquariids";
+            readonly Perseids: "Perseids";
+            readonly Draconids: "Draconids";
+            readonly "Southern Taurids": "Southern Taurids";
+            readonly Orionids: "Orionids";
+            readonly "Northern Taurids": "Northern Taurids";
+            readonly Leonids: "Leonids";
+            readonly Geminids: "Geminids";
+            readonly Ursids: "Ursids";
         };
         readonly objects: {
             readonly Sun: "Sun";
@@ -126,6 +144,9 @@ export declare const translations: {
             readonly morning: "सुबह";
             readonly evening: "शाम";
             readonly distance: "दूरी";
+            readonly zhr: "ZHR";
+            readonly peakDate: "चरम तिथि";
+            readonly active: "अभी सक्रिय";
         };
         readonly eclipseKinds: {
             readonly penumbral: "उपच्छाया";
@@ -143,6 +164,21 @@ export declare const translations: {
             readonly opposition: "प्रतियुति";
             readonly greatestElongation: "अधिकतम दिगंश";
             readonly supermoon: "सुपरमून";
+        };
+        readonly showers: {
+            readonly Quadrantids: "क्वाड्रंटिड्स";
+            readonly Lyrids: "लिरिड्स";
+            readonly "Eta Aquariids": "ईटा एक्वेरिड्स";
+            readonly "Alpha Capricornids": "अल्फा कैप्रिकोर्निड्स";
+            readonly "Southern Delta Aquariids": "दक्षिणी डेल्टा एक्वेरिड्स";
+            readonly Perseids: "पर्सिड्स";
+            readonly Draconids: "ड्रैकोनिड्स";
+            readonly "Southern Taurids": "दक्षिणी टॉरिड्स";
+            readonly Orionids: "ओरायोनिड्स";
+            readonly "Northern Taurids": "उत्तरी टॉरिड्स";
+            readonly Leonids: "लियोनिड्स";
+            readonly Geminids: "जेमिनिड्स";
+            readonly Ursids: "उर्सिड्स";
         };
         readonly objects: {
             readonly Sun: "सूर्य";
@@ -227,6 +263,9 @@ export declare const translations: {
             readonly morning: "Matin";
             readonly evening: "Soir";
             readonly distance: "Distance";
+            readonly zhr: "THZ";
+            readonly peakDate: "Date du maximum";
+            readonly active: "Actuellement active";
         };
         readonly eclipseKinds: {
             readonly penumbral: "Pénombre";
@@ -244,6 +283,21 @@ export declare const translations: {
             readonly opposition: "Opposition";
             readonly greatestElongation: "Plus grande élongation";
             readonly supermoon: "Super lune";
+        };
+        readonly showers: {
+            readonly Quadrantids: "Quadrantides";
+            readonly Lyrids: "Lyrides";
+            readonly "Eta Aquariids": "Êta Aquarides";
+            readonly "Alpha Capricornids": "Alpha Capricornides";
+            readonly "Southern Delta Aquariids": "Delta Aquarides du Sud";
+            readonly Perseids: "Perséides";
+            readonly Draconids: "Draconides";
+            readonly "Southern Taurids": "Taurides du Sud";
+            readonly Orionids: "Orionides";
+            readonly "Northern Taurids": "Taurides du Nord";
+            readonly Leonids: "Léonides";
+            readonly Geminids: "Géminides";
+            readonly Ursids: "Ursides";
         };
         readonly objects: {
             readonly Sun: "Soleil";

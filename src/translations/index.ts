@@ -14,7 +14,8 @@ export type TranslationKey =
   | `languages.${keyof typeof en.languages}`
   | `eclipseKinds.${keyof typeof en.eclipseKinds}`
   | `eclipseTypes.${keyof typeof en.eclipseTypes}`
-  | `events.${keyof typeof en.events}`;
+  | `events.${keyof typeof en.events}`
+  | `showers.${keyof typeof en.showers}`;
 
 export const translations = {
   en,

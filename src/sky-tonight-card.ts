@@ -16,6 +16,10 @@ import {
   CelestialEventInfo,
   getUpcomingCelestialEvents,
 } from "./celestial-events";
+import {
+  MeteorShowerEvent,
+  getActiveOrUpcomingShowers,
+} from "./meteor-showers";
 import "./sky-tonight-card-editor";
 
 type CelestialObjectInfo = {
@@ -272,6 +276,7 @@ export class SkyTonightNativeCard extends LitElement {
     const showConfiguration = this.config.showConfiguration === true;
     const showEclipses = this.config.showEclipses !== false;
     const showCelestialEvents = this.config.showCelestialEvents !== false;
+    const showMeteorShowers = this.config.showMeteorShowers !== false;
 
     const now = DateTime.local();
     const observer = new Observer(latitude, longitude, elevation);
@@ -315,6 +320,7 @@ export class SkyTonightNativeCard extends LitElement {
     const upcomingEvents = this.getUpcomingEvents(observer, now, {
       showEclipses,
       showCelestialEvents,
+      showMeteorShowers,
     });
     const eventsByCategory = this.groupEventsByCategory(upcomingEvents);
 
@@ -481,7 +487,11 @@ export class SkyTonightNativeCard extends LitElement {
   private getUpcomingEvents(
     observer: Observer,
     now: DateTime,
-    flags: { showEclipses: boolean; showCelestialEvents: boolean }
+    flags: {
+      showEclipses: boolean;
+      showCelestialEvents: boolean;
+      showMeteorShowers: boolean;
+    }
   ): EventRow[] {
     const events: EventRow[] = [];
     if (flags.showEclipses) {
@@ -490,7 +500,9 @@ export class SkyTonightNativeCard extends LitElement {
     if (flags.showCelestialEvents) {
       events.push(...this.getCelestialEventRows(now));
     }
-    // Populated by a later phase: meteor showers.
+    if (flags.showMeteorShowers) {
+      events.push(...this.getMeteorShowerEventRows(now));
+    }
     return events;
   }
 
@@ -593,6 +605,28 @@ export class SkyTonightNativeCard extends LitElement {
       name,
       date: event.date,
       subtitle: lines.length > 0 ? lines.join("\n") : undefined,
+    };
+  }
+
+  private getMeteorShowerEventRows(now: DateTime): EventRow[] {
+    const showers = getActiveOrUpcomingShowers(now.toJSDate());
+    return showers.map((shower) => this.buildMeteorShowerRow(shower));
+  }
+
+  private buildMeteorShowerRow(shower: MeteorShowerEvent): EventRow {
+    const name = this._translate(`showers.${shower.name}` as TranslationKey);
+
+    const lines: string[] = [];
+    if (shower.isActive) {
+      lines.push(this._translate("card.active"));
+    }
+    lines.push(`${this._translate("card.zhr")}: ${shower.zhr}`);
+
+    return {
+      category: "meteorShower",
+      name,
+      date: shower.peak,
+      subtitle: lines.join("\n"),
     };
   }
 

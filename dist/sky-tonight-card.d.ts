@@ -15,6 +15,8 @@ export declare class SkyTonightNativeCard extends LitElement {
     private buildEclipseRow;
     private getCelestialEventRows;
     private buildCelestialEventRow;
+    private getMeteorShowerEventRows;
+    private buildMeteorShowerRow;
     private groupEventsByCategory;
     private getCategoryLabelKey;
     private getAltitude;

@@ -22,6 +22,9 @@ export declare const hi: {
         readonly morning: "सुबह";
         readonly evening: "शाम";
         readonly distance: "दूरी";
+        readonly zhr: "ZHR";
+        readonly peakDate: "चरम तिथि";
+        readonly active: "अभी सक्रिय";
     };
     readonly eclipseKinds: {
         readonly penumbral: "उपच्छाया";
@@ -39,6 +42,21 @@ export declare const hi: {
         readonly opposition: "प्रतियुति";
         readonly greatestElongation: "अधिकतम दिगंश";
         readonly supermoon: "सुपरमून";
+    };
+    readonly showers: {
+        readonly Quadrantids: "क्वाड्रंटिड्स";
+        readonly Lyrids: "लिरिड्स";
+        readonly "Eta Aquariids": "ईटा एक्वेरिड्स";
+        readonly "Alpha Capricornids": "अल्फा कैप्रिकोर्निड्स";
+        readonly "Southern Delta Aquariids": "दक्षिणी डेल्टा एक्वेरिड्स";
+        readonly Perseids: "पर्सिड्स";
+        readonly Draconids: "ड्रैकोनिड्स";
+        readonly "Southern Taurids": "दक्षिणी टॉरिड्स";
+        readonly Orionids: "ओरायोनिड्स";
+        readonly "Northern Taurids": "उत्तरी टॉरिड्स";
+        readonly Leonids: "लियोनिड्स";
+        readonly Geminids: "जेमिनिड्स";
+        readonly Ursids: "उर्सिड्स";
     };
     readonly objects: {
         readonly Sun: "सूर्य";

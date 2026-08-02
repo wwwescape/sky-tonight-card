@@ -22,6 +22,9 @@ export declare const fr: {
         readonly morning: "Matin";
         readonly evening: "Soir";
         readonly distance: "Distance";
+        readonly zhr: "THZ";
+        readonly peakDate: "Date du maximum";
+        readonly active: "Actuellement active";
     };
     readonly eclipseKinds: {
         readonly penumbral: "Pénombre";
@@ -39,6 +42,21 @@ export declare const fr: {
         readonly opposition: "Opposition";
         readonly greatestElongation: "Plus grande élongation";
         readonly supermoon: "Super lune";
+    };
+    readonly showers: {
+        readonly Quadrantids: "Quadrantides";
+        readonly Lyrids: "Lyrides";
+        readonly "Eta Aquariids": "Êta Aquarides";
+        readonly "Alpha Capricornids": "Alpha Capricornides";
+        readonly "Southern Delta Aquariids": "Delta Aquarides du Sud";
+        readonly Perseids: "Perséides";
+        readonly Draconids: "Draconides";
+        readonly "Southern Taurids": "Taurides du Sud";
+        readonly Orionids: "Orionides";
+        readonly "Northern Taurids": "Taurides du Nord";
+        readonly Leonids: "Léonides";
+        readonly Geminids: "Géminides";
+        readonly Ursids: "Ursides";
     };
     readonly objects: {
         readonly Sun: "Soleil";
