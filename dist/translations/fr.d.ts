@@ -38,6 +38,8 @@ export declare const fr: {
         readonly shortestDay: "Jour le plus court de l'année";
         readonly visibleAllNight: "Visible toute la nuit";
         readonly eventEmpty: "Aucun événement à venir";
+        readonly scrollTabsLeft: "Faire défiler les onglets vers la gauche";
+        readonly scrollTabsRight: "Faire défiler les onglets vers la droite";
     };
     readonly eclipseKinds: {
         readonly penumbral: "Pénombre";

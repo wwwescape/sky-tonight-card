@@ -38,6 +38,8 @@ export declare const de: {
         readonly shortestDay: "Kürzester Tag des Jahres";
         readonly visibleAllNight: "Die ganze Nacht sichtbar";
         readonly eventEmpty: "Keine bevorstehenden Ereignisse";
+        readonly scrollTabsLeft: "Tabs nach links scrollen";
+        readonly scrollTabsRight: "Tabs nach rechts scrollen";
     };
     readonly eclipseKinds: {
         readonly penumbral: "Halbschatten";

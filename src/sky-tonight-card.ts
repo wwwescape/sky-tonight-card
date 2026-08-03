@@ -1,5 +1,6 @@
-import { LitElement, html, css, TemplateResult } from "lit";
+import { LitElement, html, css, TemplateResult, PropertyValues } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { ref, createRef, Ref } from "lit/directives/ref.js";
 import {
   Observer,
   SearchRiseSet,
@@ -132,7 +133,14 @@ export class SkyTonightNativeCard extends LitElement {
   };
   @state() private languageOverride?: LanguageCode;
   @state() private activeTab: TabId = "solarSystem";
+  @state() private canScrollTabsLeft = false;
+  @state() private canScrollTabsRight = false;
+  private tabBarRef: Ref<HTMLDivElement> = createRef();
   private lastMaxTabRowCount = 0;
+  private readonly tabWheelListener = {
+    handleEvent: (e: WheelEvent) => this.handleTabWheel(e),
+    passive: false,
+  };
 
   static get styles() {
     return css`
@@ -225,11 +233,18 @@ export class SkyTonightNativeCard extends LitElement {
         margin: 4px 0;
       }
 
+      .tab-bar-wrapper {
+        display: flex;
+        align-items: center;
+        margin-top: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
       .tab-bar {
         display: flex;
         gap: 4px;
-        margin-top: 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        flex: 1;
+        min-width: 0;
         overflow-x: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
@@ -237,6 +252,26 @@ export class SkyTonightNativeCard extends LitElement {
 
       .tab-bar::-webkit-scrollbar {
         display: none;
+      }
+
+      .tab-scroll-button {
+        flex-shrink: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px 6px;
+        font-size: 1.2rem;
+        line-height: 1;
+        color: var(--object-type-color, #aaaaaa);
+        visibility: hidden;
+      }
+
+      .tab-scroll-button.visible {
+        visibility: visible;
+      }
+
+      .tab-scroll-button:hover {
+        color: var(--card-text-color, #ffffff);
       }
 
       .tab-button {
@@ -716,27 +751,80 @@ export class SkyTonightNativeCard extends LitElement {
     const activeTab = tabs.includes(this.activeTab) ? this.activeTab : tabs[0];
 
     return html`
-      <div class="tab-bar">
-        ${tabs.map(
-          (tab) => html`
-            <button
-              class="tab-button ${tab === activeTab ? "active" : ""}"
-              @click=${() => {
-                this.activeTab = tab;
-              }}
-            >
-              <img
-                src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/tabs/${TAB_ICON_FILE[
-                  tab
-                ]}.png"
-                alt=""
-              />
-              ${this._translate(this.getTabLabelKey(tab))}
-            </button>
-          `
-        )}
+      <div class="tab-bar-wrapper">
+        <button
+          class="tab-scroll-button ${this.canScrollTabsLeft ? "visible" : ""}"
+          aria-label="${this._translate("card.scrollTabsLeft")}"
+          @click=${() => this.scrollTabs(-1)}
+        >
+          ‹
+        </button>
+        <div
+          class="tab-bar"
+          ${ref(this.tabBarRef)}
+          @wheel=${this.tabWheelListener}
+          @scroll=${() => this.updateTabScrollState()}
+        >
+          ${tabs.map(
+            (tab) => html`
+              <button
+                class="tab-button ${tab === activeTab ? "active" : ""}"
+                @click=${() => {
+                  this.activeTab = tab;
+                }}
+              >
+                <img
+                  src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/tabs/${TAB_ICON_FILE[
+                    tab
+                  ]}.png"
+                  alt=""
+                />
+                ${this._translate(this.getTabLabelKey(tab))}
+              </button>
+            `
+          )}
+        </div>
+        <button
+          class="tab-scroll-button ${this.canScrollTabsRight ? "visible" : ""}"
+          aria-label="${this._translate("card.scrollTabsRight")}"
+          @click=${() => this.scrollTabs(1)}
+        >
+          ›
+        </button>
       </div>
     `;
+  }
+
+  private handleTabWheel(e: WheelEvent): void {
+    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+    const el = this.tabBarRef.value;
+    if (!el) return;
+    e.preventDefault();
+    el.scrollLeft += e.deltaY;
+  }
+
+  private scrollTabs(direction: 1 | -1): void {
+    this.tabBarRef.value?.scrollBy({
+      left: direction * 150,
+      behavior: "smooth",
+    });
+  }
+
+  private updateTabScrollState(): void {
+    const el = this.tabBarRef.value;
+    if (!el) {
+      this.canScrollTabsLeft = false;
+      this.canScrollTabsRight = false;
+      return;
+    }
+    this.canScrollTabsLeft = el.scrollLeft > 0;
+    this.canScrollTabsRight =
+      el.scrollLeft + el.clientWidth < el.scrollWidth - 1;
+  }
+
+  protected updated(changedProperties: PropertyValues): void {
+    super.updated(changedProperties);
+    this.updateTabScrollState();
   }
 
   private renderActiveTabPanel(

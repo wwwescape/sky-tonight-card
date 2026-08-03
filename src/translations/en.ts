@@ -38,6 +38,8 @@ export const en = {
     shortestDay: "Shortest day of the year",
     visibleAllNight: "Visible all night",
     eventEmpty: "No upcoming events",
+    scrollTabsLeft: "Scroll tabs left",
+    scrollTabsRight: "Scroll tabs right",
   },
   eclipseKinds: {
     penumbral: "Penumbral",

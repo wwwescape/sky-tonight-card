@@ -38,6 +38,8 @@ export declare const hi: {
         readonly shortestDay: "वर्ष का सबसे छोटा दिन";
         readonly visibleAllNight: "पूरी रात दिखाई देगा";
         readonly eventEmpty: "कोई आगामी घटना नहीं";
+        readonly scrollTabsLeft: "टैब बाईं ओर स्क्रॉल करें";
+        readonly scrollTabsRight: "टैब दाईं ओर स्क्रॉल करें";
     };
     readonly eclipseKinds: {
         readonly penumbral: "उपच्छाया";

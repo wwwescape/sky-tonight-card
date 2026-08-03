@@ -38,6 +38,8 @@ export const it = {
     shortestDay: "Giorno più corto dell'anno",
     visibleAllNight: "Visibile tutta la notte",
     eventEmpty: "Nessun evento in arrivo",
+    scrollTabsLeft: "Scorri le schede a sinistra",
+    scrollTabsRight: "Scorri le schede a destra",
   },
   eclipseKinds: {
     penumbral: "Penombrale",

@@ -1,11 +1,15 @@
-import { LitElement, TemplateResult } from "lit";
+import { LitElement, TemplateResult, PropertyValues } from "lit";
 import "./sky-tonight-card-editor";
 export declare class SkyTonightNativeCard extends LitElement {
     hass: any;
     private config;
     private languageOverride?;
     private activeTab;
+    private canScrollTabsLeft;
+    private canScrollTabsRight;
+    private tabBarRef;
     private lastMaxTabRowCount;
+    private readonly tabWheelListener;
     static get styles(): import("lit").CSSResult;
     private _translate;
     setConfig(config: any): void;
@@ -24,6 +28,10 @@ export declare class SkyTonightNativeCard extends LitElement {
     private getTabLabelKey;
     private getVisibleTabs;
     private renderTabBar;
+    private handleTabWheel;
+    private scrollTabs;
+    private updateTabScrollState;
+    protected updated(changedProperties: PropertyValues): void;
     private renderActiveTabPanel;
     private renderEventCard;
     private renderSolarSystemPanel;
