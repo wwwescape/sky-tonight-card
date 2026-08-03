@@ -25,6 +25,13 @@ export const de = {
     zhr: "ZHR",
     peakDate: "Höhepunktdatum",
     active: "Derzeit aktiv",
+    solarSystem: "Sonnensystem",
+    status: "Status",
+    peaksIn: "Höhepunkt in {days} Tagen",
+    radiantAboveHorizon: "{deg}° über dem Horizont",
+    radiantBelowHorizon: "Heute Nacht unter dem Horizont",
+    elongation: "Elongation",
+    eventEmpty: "Keine bevorstehenden Ereignisse",
   },
   eclipseKinds: {
     penumbral: "Halbschatten",

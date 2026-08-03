@@ -4,7 +4,8 @@ export declare class SkyTonightNativeCard extends LitElement {
     hass: any;
     private config;
     private languageOverride?;
-    private lastUpcomingEventCount;
+    private activeTab;
+    private lastMaxTabRowCount;
     static get styles(): import("lit").CSSResult;
     private _translate;
     setConfig(config: any): void;
@@ -20,6 +21,12 @@ export declare class SkyTonightNativeCard extends LitElement {
     private buildMeteorShowerRow;
     private groupEventsByCategory;
     private getCategoryLabelKey;
+    private getTabLabelKey;
+    private getVisibleTabs;
+    private renderTabBar;
+    private renderActiveTabPanel;
+    private renderEventCard;
+    private renderSolarSystemPanel;
     private getAltitude;
     private getRiseSet;
     private calculateDuration;

@@ -10,7 +10,7 @@ import {
 } from "astronomy-engine";
 import { DateTime } from "luxon";
 import { translations, TranslationKey, LanguageCode } from "./translations";
-import { EventCategory, EventRow } from "./event-types";
+import { EventCategory, EventDataRow, EventRow } from "./event-types";
 import { EclipseInfo, getUpcomingEclipses } from "./eclipses";
 import {
   CelestialEventInfo,
@@ -22,6 +22,24 @@ import {
 } from "./meteor-showers";
 import "./sky-tonight-card-editor";
 
+type TabId = "solarSystem" | EventCategory;
+
+const MAX_ROWS_PER_TAB = 10;
+
+const TAB_ORDER: TabId[] = [
+  "solarSystem",
+  "eclipse",
+  "celestialEvent",
+  "meteorShower",
+];
+
+const TAB_ICON_FILE: Record<TabId, string> = {
+  solarSystem: "solar-system",
+  eclipse: "eclipses",
+  celestialEvent: "celestial-events",
+  meteorShower: "meteor-showers",
+};
+
 type CelestialObjectInfo = {
   body: Body;
   name: string;
@@ -29,6 +47,15 @@ type CelestialObjectInfo = {
   isNakedEye: boolean;
   isBinocular: boolean;
 };
+
+interface CelestialObjectDisplay extends CelestialObjectInfo {
+  rise: DateTime;
+  set: DateTime;
+  riseStr: string;
+  setStr: string;
+  duration: string;
+  altitude: number;
+}
 
 const CelestialObjects: CelestialObjectInfo[] = [
   {
@@ -104,7 +131,8 @@ export class SkyTonightNativeCard extends LitElement {
     showBelowHorizon: false,
   };
   @state() private languageOverride?: LanguageCode;
-  private lastUpcomingEventCount = 0;
+  @state() private activeTab: TabId = "solarSystem";
+  private lastMaxTabRowCount = 0;
 
   static get styles() {
     return css`
@@ -197,31 +225,56 @@ export class SkyTonightNativeCard extends LitElement {
         margin: 4px 0;
       }
 
-      .events-section {
+      .tab-bar {
+        display: flex;
+        gap: 4px;
         margin-top: 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        overflow-x: auto;
       }
 
-      .events-section summary {
+      .tab-button {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
         cursor: pointer;
-        font-size: 1.1rem;
+        font-family: inherit;
+        font-size: 0.85rem;
         font-weight: 600;
-        color: var(--card-text-color, #ffffff);
+        color: var(--object-type-color, #aaaaaa);
+        white-space: nowrap;
       }
 
-      .event-category {
+      .tab-button img {
+        width: 18px;
+        height: 18px;
+      }
+
+      .tab-button.active {
+        color: var(--card-text-color, #ffffff);
+        border-bottom-color: var(--object-name-color, #ffffff);
+      }
+
+      .tab-panel {
         margin-top: 12px;
       }
 
-      .event-category h3 {
-        margin: 0 0 8px;
-        font-size: 0.95rem;
+      .event-row {
+        justify-content: space-between;
+      }
+
+      .event-row-label {
         color: var(--object-type-color, #aaaaaa);
       }
 
-      .event-subtitle {
+      .event-empty {
         font-size: 0.85rem;
         color: var(--object-data-color, #cccccc);
-        white-space: pre-line;
+        padding: 8px 0;
       }
     `;
   }
@@ -324,7 +377,13 @@ export class SkyTonightNativeCard extends LitElement {
       showMeteorShowers,
     });
     const eventsByCategory = this.groupEventsByCategory(upcomingEvents);
-    this.lastUpcomingEventCount = upcomingEvents.length;
+    this.lastMaxTabRowCount = Math.max(
+      Math.min(celestialObjectsWithTimes.length, MAX_ROWS_PER_TAB),
+      ...Array.from(eventsByCategory.values()).map((events) =>
+        Math.min(events.length, MAX_ROWS_PER_TAB)
+      ),
+      0
+    );
 
     const style = html`
       <style>
@@ -363,125 +422,17 @@ export class SkyTonightNativeCard extends LitElement {
               </div>
             `
           : ""}
-        <div class="astro-list">
-          ${celestialObjectsWithTimes.map(
-            (obj) => html`
-              <div class="astro-card">
-                <img
-                  src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/objects/${obj.name}.png"
-                  alt="${this._translate(
-                    `objects.${obj.name}` as TranslationKey
-                  )}"
-                />
-                <div class="astro-info">
-                  <div class="astro-type">
-                    ${this._translate(`types.${obj.type}` as TranslationKey)}
-                  </div>
-                  <div class="astro-name">
-                    ${this._translate(`objects.${obj.name}` as TranslationKey)}
-                  </div>
-                  <div class="astro-data">
-                    ${this._translate("card.visible")}: ${obj.riseStr} -
-                    ${obj.setStr}
-                  </div>
-                  <div class="astro-data">
-                    ${this._translate("card.duration")}: ${obj.duration}
-                  </div>
-                  <div class="astro-data">
-                    ${this._translate("card.altitude")}:
-                    ${obj.altitude.toFixed(1)}°
-                  </div>
-                  ${obj.body === Body.Moon
-                    ? html`
-                        <div class="astro-data">
-                          ${this._translate("card.moonPhase")}:
-                          <img
-                            src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/moon-phases/${this.toKebabCase(
-                              moonPhase
-                            )}.png"
-                            alt="${this._translate(
-                              `moonPhases.${moonPhase}` as TranslationKey
-                            )}"
-                          />
-                          ${this._translate(
-                            `moonPhases.${moonPhase}` as TranslationKey
-                          )}
-                        </div>
-                      `
-                    : ""}
-                </div>
-                <div class="astro-icons">
-                  <div>
-                    <img
-                      src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude >
-                        0 && obj.isNakedEye
-                        ? "eye.png"
-                        : "eye_disabled.png"}"
-                      alt="${this._translate("card.nakedEye")}"
-                    />
-                  </div>
-                  <div>
-                    <img
-                      src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude >
-                        0 && obj.isBinocular
-                        ? "binoculars.png"
-                        : "binoculars_disabled.png"}"
-                      alt="${this._translate("card.binocular")}"
-                    />
-                  </div>
-                  <div>
-                    <img
-                      src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude >
-                      0
-                        ? "telescope.png"
-                        : "telescope_disabled.png"}"
-                      alt="${this._translate("card.telescope")}"
-                    />
-                  </div>
-                </div>
-              </div>
-            `
-          )}
-        </div>
-        ${eventsByCategory.size > 0
-          ? html`
-              <details class="events-section" open>
-                <summary>${this._translate("card.upcomingEvents")}</summary>
-                ${Array.from(eventsByCategory.entries()).map(
-                  ([category, events]) => html`
-                    <div class="event-category">
-                      <h3>
-                        ${this._translate(this.getCategoryLabelKey(category))}
-                      </h3>
-                      <div class="astro-list">
-                        ${events.map(
-                          (event) => html`
-                            <div class="astro-card">
-                              <div class="astro-info">
-                                <div class="astro-name">${event.name}</div>
-                                ${event.subtitle
-                                  ? html`<div class="event-subtitle">
-                                      ${event.subtitle}
-                                    </div>`
-                                  : ""}
-                                <div class="astro-data">
-                                  ${DateTime.fromJSDate(
-                                    event.date
-                                  ).toFormat("MMM dd HH:mm", {
-                                    locale: this.getLocale(),
-                                  })}
-                                </div>
-                              </div>
-                            </div>
-                          `
-                        )}
-                      </div>
-                    </div>
-                  `
-                )}
-              </details>
-            `
-          : ""}
+        ${this.renderTabBar({
+          showEclipses,
+          showCelestialEvents,
+          showMeteorShowers,
+        })}
+        ${this.renderActiveTabPanel(
+          { showEclipses, showCelestialEvents, showMeteorShowers },
+          celestialObjectsWithTimes,
+          moonPhase,
+          eventsByCategory
+        )}
       </ha-card>
     `;
   }
@@ -503,7 +454,7 @@ export class SkyTonightNativeCard extends LitElement {
       events.push(...this.getCelestialEventRows(now));
     }
     if (flags.showMeteorShowers) {
-      events.push(...this.getMeteorShowerEventRows(now));
+      events.push(...this.getMeteorShowerEventRows(now, observer));
     }
     return events;
   }
@@ -524,30 +475,36 @@ export class SkyTonightNativeCard extends LitElement {
     const typeKey: TranslationKey =
       eclipse.type === "lunar" ? "eclipseTypes.lunar" : "eclipseTypes.solar";
     const kindKey = `eclipseKinds.${eclipse.kind}` as TranslationKey;
-    const name = `${this._translate(typeKey)} — ${this._translate(kindKey)}`;
+    const name = `${eclipse.isCurrent ? `${this._translate("card.eclipseCurrent")} — ` : ""}${this._translate(
+      typeKey
+    )} — ${this._translate(kindKey)}`;
 
-    const lines: string[] = [];
-    if (eclipse.isCurrent) {
-      lines.push(this._translate("card.eclipseCurrent"));
-    }
-    lines.push(
-      `${this._translate(
-        "card.eclipseObscuration"
-      )}: ${(eclipse.obscuration * 100).toFixed(0)}%`
-    );
-    const beginStr = DateTime.fromJSDate(eclipse.begin)
-      .setZone(timeZone)
-      .toFormat("HH:mm", { locale });
-    const endStr = DateTime.fromJSDate(eclipse.end)
-      .setZone(timeZone)
-      .toFormat("HH:mm", { locale });
-    lines.push(`${beginStr} – ${endStr}`);
+    const begin = DateTime.fromJSDate(eclipse.begin).setZone(timeZone);
+    const end = DateTime.fromJSDate(eclipse.end).setZone(timeZone);
+
+    const rows: EventDataRow[] = [
+      {
+        label: this._translate("card.visible"),
+        value: `${begin.toFormat("HH:mm", { locale })} – ${end.toFormat(
+          "HH:mm",
+          { locale }
+        )}`,
+      },
+      {
+        label: this._translate("card.duration"),
+        value: this.calculateDuration(begin, end),
+      },
+      {
+        label: this._translate("card.eclipseObscuration"),
+        value: `${(eclipse.obscuration * 100).toFixed(0)}%`,
+      },
+    ];
 
     return {
       category: "eclipse",
       name,
       date: eclipse.peak,
-      subtitle: lines.join("\n"),
+      rows,
     };
   }
 
@@ -567,7 +524,7 @@ export class SkyTonightNativeCard extends LitElement {
       : undefined;
 
     let name: string;
-    const lines: string[] = [];
+    const rows: EventDataRow[] = [];
 
     switch (event.kind) {
       case "equinox":
@@ -580,24 +537,27 @@ export class SkyTonightNativeCard extends LitElement {
       case "greatestElongation":
         name = `${bodyLabel} ${this._translate("events.greatestElongation")}`;
         if (event.visibility) {
-          lines.push(
-            `${this._translate("card.visibility")}: ${this._translate(
+          rows.push({
+            label: this._translate("card.visibility"),
+            value: this._translate(
               `card.${event.visibility}` as TranslationKey
-            )}`
-          );
+            ),
+          });
         }
         if (event.elongationDegrees !== undefined) {
-          lines.push(`${event.elongationDegrees.toFixed(1)}°`);
+          rows.push({
+            label: this._translate("card.elongation"),
+            value: `${event.elongationDegrees.toFixed(1)}°`,
+          });
         }
         break;
       case "supermoon":
         name = this._translate("events.supermoon");
         if (event.distanceKm !== undefined) {
-          lines.push(
-            `${this._translate(
-              "card.distance"
-            )}: ${Math.round(event.distanceKm).toLocaleString(locale)} km`
-          );
+          rows.push({
+            label: this._translate("card.distance"),
+            value: `${Math.round(event.distanceKm).toLocaleString(locale)} km`,
+          });
         }
         break;
     }
@@ -606,29 +566,61 @@ export class SkyTonightNativeCard extends LitElement {
       category: "celestialEvent",
       name,
       date: event.date,
-      subtitle: lines.length > 0 ? lines.join("\n") : undefined,
+      rows,
     };
   }
 
-  private getMeteorShowerEventRows(now: DateTime): EventRow[] {
-    const showers = getActiveOrUpcomingShowers(now.toJSDate());
-    return showers.map((shower) => this.buildMeteorShowerRow(shower));
+  private getMeteorShowerEventRows(
+    now: DateTime,
+    observer: Observer
+  ): EventRow[] {
+    const showers = getActiveOrUpcomingShowers(now.toJSDate(), observer);
+    return showers.map((shower) => this.buildMeteorShowerRow(shower, now));
   }
 
-  private buildMeteorShowerRow(shower: MeteorShowerEvent): EventRow {
+  private buildMeteorShowerRow(
+    shower: MeteorShowerEvent,
+    now: DateTime
+  ): EventRow {
     const name = this._translate(`showers.${shower.name}` as TranslationKey);
+    const locale = this.getLocale();
 
-    const lines: string[] = [];
-    if (shower.isActive) {
-      lines.push(this._translate("card.active"));
-    }
-    lines.push(`${this._translate("card.zhr")}: ${shower.zhr}`);
+    const statusValue = shower.isActive
+      ? this._translate("card.active")
+      : this._translate("card.peaksIn").replace(
+          "{days}",
+          String(
+            Math.ceil(
+              DateTime.fromJSDate(shower.peak).diff(now, "days").days
+            )
+          )
+        );
+
+    const visibilityValue = shower.isRadiantVisible
+      ? this._translate("card.radiantAboveHorizon").replace(
+          "{deg}",
+          shower.radiantAltitude.toFixed(0)
+        )
+      : this._translate("card.radiantBelowHorizon");
+
+    const rows: EventDataRow[] = [
+      { label: this._translate("card.status"), value: statusValue },
+      { label: this._translate("card.zhr"), value: String(shower.zhr) },
+      {
+        label: this._translate("card.peakDate"),
+        value: DateTime.fromJSDate(shower.peakLocalTime).toFormat(
+          "MMM dd HH:mm",
+          { locale }
+        ),
+      },
+      { label: this._translate("card.visibility"), value: visibilityValue },
+    ];
 
     return {
       category: "meteorShower",
       name,
       date: shower.peak,
-      subtitle: lines.join("\n"),
+      rows,
     };
   }
 
@@ -653,6 +645,205 @@ export class SkyTonightNativeCard extends LitElement {
       case "celestialEvent":
         return "card.celestialEvents";
     }
+  }
+
+  private getTabLabelKey(tab: TabId): TranslationKey {
+    return tab === "solarSystem" ? "card.solarSystem" : this.getCategoryLabelKey(tab);
+  }
+
+  private getVisibleTabs(flags: {
+    showEclipses: boolean;
+    showCelestialEvents: boolean;
+    showMeteorShowers: boolean;
+  }): TabId[] {
+    return TAB_ORDER.filter((tab) => {
+      switch (tab) {
+        case "eclipse":
+          return flags.showEclipses;
+        case "celestialEvent":
+          return flags.showCelestialEvents;
+        case "meteorShower":
+          return flags.showMeteorShowers;
+        default:
+          return true;
+      }
+    });
+  }
+
+  private renderTabBar(flags: {
+    showEclipses: boolean;
+    showCelestialEvents: boolean;
+    showMeteorShowers: boolean;
+  }): TemplateResult {
+    const tabs = this.getVisibleTabs(flags);
+    const activeTab = tabs.includes(this.activeTab) ? this.activeTab : tabs[0];
+
+    return html`
+      <div class="tab-bar">
+        ${tabs.map(
+          (tab) => html`
+            <button
+              class="tab-button ${tab === activeTab ? "active" : ""}"
+              @click=${() => {
+                this.activeTab = tab;
+              }}
+            >
+              <img
+                src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/tabs/${TAB_ICON_FILE[
+                  tab
+                ]}.png"
+                alt=""
+              />
+              ${this._translate(this.getTabLabelKey(tab))}
+            </button>
+          `
+        )}
+      </div>
+    `;
+  }
+
+  private renderActiveTabPanel(
+    flags: {
+      showEclipses: boolean;
+      showCelestialEvents: boolean;
+      showMeteorShowers: boolean;
+    },
+    celestialObjectsWithTimes: CelestialObjectDisplay[],
+    moonPhase: string,
+    eventsByCategory: Map<EventCategory, EventRow[]>
+  ): TemplateResult {
+    const tabs = this.getVisibleTabs(flags);
+    const activeTab = tabs.includes(this.activeTab) ? this.activeTab : tabs[0];
+
+    if (activeTab === "solarSystem") {
+      return this.renderSolarSystemPanel(celestialObjectsWithTimes, moonPhase);
+    }
+
+    const events = (eventsByCategory.get(activeTab) ?? []).slice(
+      0,
+      MAX_ROWS_PER_TAB
+    );
+
+    if (events.length === 0) {
+      return html`<div class="tab-panel event-empty">
+        ${this._translate("card.eventEmpty")}
+      </div>`;
+    }
+
+    return html`
+      <div class="tab-panel astro-list">
+        ${events.map((event) => this.renderEventCard(event))}
+      </div>
+    `;
+  }
+
+  private renderEventCard(event: EventRow): TemplateResult {
+    return html`
+      <div class="astro-card">
+        <div class="astro-info">
+          <div class="astro-name">${event.name}</div>
+          ${event.rows.map(
+            (row) => html`
+              <div class="astro-data event-row">
+                <span class="event-row-label">${row.label}:</span>
+                <span>${row.value}</span>
+              </div>
+            `
+          )}
+          <div class="astro-data">
+            ${DateTime.fromJSDate(event.date).toFormat("MMM dd HH:mm", {
+              locale: this.getLocale(),
+            })}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  private renderSolarSystemPanel(
+    celestialObjectsWithTimes: CelestialObjectDisplay[],
+    moonPhase: string
+  ): TemplateResult {
+    return html`
+      <div class="tab-panel astro-list">
+        ${celestialObjectsWithTimes.slice(0, MAX_ROWS_PER_TAB).map(
+          (obj) => html`
+            <div class="astro-card">
+              <img
+                src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/objects/${obj.name}.png"
+                alt="${this._translate(`objects.${obj.name}` as TranslationKey)}"
+              />
+              <div class="astro-info">
+                <div class="astro-type">
+                  ${this._translate(`types.${obj.type}` as TranslationKey)}
+                </div>
+                <div class="astro-name">
+                  ${this._translate(`objects.${obj.name}` as TranslationKey)}
+                </div>
+                <div class="astro-data">
+                  ${this._translate("card.visible")}: ${obj.riseStr} -
+                  ${obj.setStr}
+                </div>
+                <div class="astro-data">
+                  ${this._translate("card.duration")}: ${obj.duration}
+                </div>
+                <div class="astro-data">
+                  ${this._translate("card.altitude")}:
+                  ${obj.altitude.toFixed(1)}°
+                </div>
+                ${obj.body === Body.Moon
+                  ? html`
+                      <div class="astro-data">
+                        ${this._translate("card.moonPhase")}:
+                        <img
+                          src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/moon-phases/${this.toKebabCase(
+                            moonPhase
+                          )}.png"
+                          alt="${this._translate(
+                            `moonPhases.${moonPhase}` as TranslationKey
+                          )}"
+                        />
+                        ${this._translate(
+                          `moonPhases.${moonPhase}` as TranslationKey
+                        )}
+                      </div>
+                    `
+                  : ""}
+              </div>
+              <div class="astro-icons">
+                <div>
+                  <img
+                    src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude >
+                      0 && obj.isNakedEye
+                      ? "eye.png"
+                      : "eye_disabled.png"}"
+                    alt="${this._translate("card.nakedEye")}"
+                  />
+                </div>
+                <div>
+                  <img
+                    src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude >
+                      0 && obj.isBinocular
+                      ? "binoculars.png"
+                      : "binoculars_disabled.png"}"
+                    alt="${this._translate("card.binocular")}"
+                  />
+                </div>
+                <div>
+                  <img
+                    src="https://cdn.jsdelivr.net/gh/wwwescape/sky-tonight-card@main/images/${obj.altitude >
+                    0
+                      ? "telescope.png"
+                      : "telescope_disabled.png"}"
+                    alt="${this._translate("card.telescope")}"
+                  />
+                </div>
+              </div>
+            </div>
+          `
+        )}
+      </div>
+    `;
   }
 
   private getAltitude(
@@ -766,13 +957,13 @@ export class SkyTonightNativeCard extends LitElement {
 
   public getCardSize(): number {
     const baseSize = 4;
-    if (this.lastUpcomingEventCount === 0) {
+    if (this.lastMaxTabRowCount === 0) {
       return baseSize;
     }
-    // Account for the "Upcoming Events" section: one unit for the section
-    // itself, plus roughly half a grid unit per event row (each row is
-    // shorter than a celestial-object row, since it has no icon column).
-    return baseSize + 1 + Math.ceil(this.lastUpcomingEventCount / 2);
+    // Only one tab panel is visible at a time, but Home Assistant sizes the
+    // card once - so size for the tallest tab (capped per MAX_ROWS_PER_TAB),
+    // not the sum across all categories, or switching tabs would clip.
+    return baseSize + 1 + Math.ceil(this.lastMaxTabRowCount / 2);
   }
 }
 

@@ -25,6 +25,13 @@ export const fr = {
     zhr: "THZ",
     peakDate: "Date du maximum",
     active: "Actuellement active",
+    solarSystem: "Système Solaire",
+    status: "Statut",
+    peaksIn: "Maximum dans {days} jours",
+    radiantAboveHorizon: "{deg}° au-dessus de l'horizon",
+    radiantBelowHorizon: "Sous l'horizon ce soir",
+    elongation: "Élongation",
+    eventEmpty: "Aucun événement à venir",
   },
   eclipseKinds: {
     penumbral: "Pénombre",

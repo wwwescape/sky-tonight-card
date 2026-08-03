@@ -25,6 +25,13 @@ export declare const hi: {
         readonly zhr: "ZHR";
         readonly peakDate: "चरम तिथि";
         readonly active: "अभी सक्रिय";
+        readonly solarSystem: "सौर मंडल";
+        readonly status: "स्थिति";
+        readonly peaksIn: "{days} दिनों में चरम पर";
+        readonly radiantAboveHorizon: "क्षितिज से {deg}° ऊपर";
+        readonly radiantBelowHorizon: "आज रात क्षितिज के नीचे";
+        readonly elongation: "दिगंश";
+        readonly eventEmpty: "कोई आगामी घटना नहीं";
     };
     readonly eclipseKinds: {
         readonly penumbral: "उपच्छाया";

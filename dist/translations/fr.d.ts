@@ -25,6 +25,13 @@ export declare const fr: {
         readonly zhr: "THZ";
         readonly peakDate: "Date du maximum";
         readonly active: "Actuellement active";
+        readonly solarSystem: "Système Solaire";
+        readonly status: "Statut";
+        readonly peaksIn: "Maximum dans {days} jours";
+        readonly radiantAboveHorizon: "{deg}° au-dessus de l'horizon";
+        readonly radiantBelowHorizon: "Sous l'horizon ce soir";
+        readonly elongation: "Élongation";
+        readonly eventEmpty: "Aucun événement à venir";
     };
     readonly eclipseKinds: {
         readonly penumbral: "Pénombre";

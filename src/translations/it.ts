@@ -25,6 +25,13 @@ export const it = {
     zhr: "ZHR",
     peakDate: "Data del Picco",
     active: "Attivo ora",
+    solarSystem: "Sistema Solare",
+    status: "Stato",
+    peaksIn: "Picco tra {days} giorni",
+    radiantAboveHorizon: "{deg}° sopra l'orizzonte",
+    radiantBelowHorizon: "Sotto l'orizzonte stanotte",
+    elongation: "Elongazione",
+    eventEmpty: "Nessun evento in arrivo",
   },
   eclipseKinds: {
     penumbral: "Penombrale",

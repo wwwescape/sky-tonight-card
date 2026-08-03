@@ -25,6 +25,13 @@ export declare const en: {
         readonly zhr: "ZHR";
         readonly peakDate: "Peak Date";
         readonly active: "Active now";
+        readonly solarSystem: "Solar System";
+        readonly status: "Status";
+        readonly peaksIn: "Peaks in {days} days";
+        readonly radiantAboveHorizon: "{deg}° above horizon";
+        readonly radiantBelowHorizon: "Below horizon tonight";
+        readonly elongation: "Elongation";
+        readonly eventEmpty: "No upcoming events";
     };
     readonly eclipseKinds: {
         readonly penumbral: "Penumbral";

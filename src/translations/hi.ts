@@ -25,6 +25,13 @@ export const hi = {
     zhr: "ZHR",
     peakDate: "चरम तिथि",
     active: "अभी सक्रिय",
+    solarSystem: "सौर मंडल",
+    status: "स्थिति",
+    peaksIn: "{days} दिनों में चरम पर",
+    radiantAboveHorizon: "क्षितिज से {deg}° ऊपर",
+    radiantBelowHorizon: "आज रात क्षितिज के नीचे",
+    elongation: "दिगंश",
+    eventEmpty: "कोई आगामी घटना नहीं",
   },
   eclipseKinds: {
     penumbral: "उपच्छाया",

@@ -25,6 +25,13 @@ export const en = {
     zhr: "ZHR",
     peakDate: "Peak Date",
     active: "Active now",
+    solarSystem: "Solar System",
+    status: "Status",
+    peaksIn: "Peaks in {days} days",
+    radiantAboveHorizon: "{deg}° above horizon",
+    radiantBelowHorizon: "Below horizon tonight",
+    elongation: "Elongation",
+    eventEmpty: "No upcoming events",
   },
   eclipseKinds: {
     penumbral: "Penumbral",
