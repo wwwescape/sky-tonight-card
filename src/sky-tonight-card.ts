@@ -231,6 +231,12 @@ export class SkyTonightNativeCard extends LitElement {
         margin-top: 16px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .tab-bar::-webkit-scrollbar {
+        display: none;
       }
 
       .tab-button {
@@ -264,7 +270,8 @@ export class SkyTonightNativeCard extends LitElement {
       }
 
       .event-row {
-        justify-content: space-between;
+        justify-content: flex-start;
+        gap: 6px;
       }
 
       .event-row-label {
@@ -451,7 +458,7 @@ export class SkyTonightNativeCard extends LitElement {
       events.push(...this.getEclipseEventRows(observer, now));
     }
     if (flags.showCelestialEvents) {
-      events.push(...this.getCelestialEventRows(now));
+      events.push(...this.getCelestialEventRows(now, observer.latitude));
     }
     if (flags.showMeteorShowers) {
       events.push(...this.getMeteorShowerEventRows(now, observer));
@@ -498,26 +505,34 @@ export class SkyTonightNativeCard extends LitElement {
         label: this._translate("card.eclipseObscuration"),
         value: `${(eclipse.obscuration * 100).toFixed(0)}%`,
       },
+      {
+        label: this._translate("card.eclipsePeak"),
+        value: DateTime.fromJSDate(eclipse.peak)
+          .setZone(timeZone)
+          .toFormat("MMM dd HH:mm", { locale }),
+      },
     ];
 
     return {
       category: "eclipse",
       name,
-      date: eclipse.peak,
       rows,
     };
   }
 
-  private getCelestialEventRows(now: DateTime): EventRow[] {
+  private getCelestialEventRows(now: DateTime, latitude: number): EventRow[] {
     const locale = this.getLocale();
     const events = getUpcomingCelestialEvents(now.toJSDate());
 
-    return events.map((event) => this.buildCelestialEventRow(event, locale));
+    return events.map((event) =>
+      this.buildCelestialEventRow(event, locale, latitude)
+    );
   }
 
   private buildCelestialEventRow(
     event: CelestialEventInfo,
-    locale: string
+    locale: string,
+    latitude: number
   ): EventRow {
     const bodyLabel = event.bodyName
       ? this._translate(`objects.${event.bodyName}` as TranslationKey)
@@ -528,11 +543,30 @@ export class SkyTonightNativeCard extends LitElement {
 
     switch (event.kind) {
       case "equinox":
-      case "solstice":
         name = this._translate(`events.${event.kind}`);
+        rows.push({
+          label: this._translate("card.dayLength"),
+          value: this._translate("card.equalDayNight"),
+        });
         break;
+      case "solstice": {
+        name = this._translate(`events.${event.kind}`);
+        const isJuneSolstice = event.date.getMonth() + 1 === 6;
+        const isLongestDay = isJuneSolstice === latitude >= 0;
+        rows.push({
+          label: this._translate("card.dayLength"),
+          value: this._translate(
+            isLongestDay ? "card.longestDay" : "card.shortestDay"
+          ),
+        });
+        break;
+      }
       case "opposition":
         name = `${bodyLabel} ${this._translate("events.opposition")}`;
+        rows.push({
+          label: this._translate("card.visibility"),
+          value: this._translate("card.visibleAllNight"),
+        });
         break;
       case "greatestElongation":
         name = `${bodyLabel} ${this._translate("events.greatestElongation")}`;
@@ -562,10 +596,14 @@ export class SkyTonightNativeCard extends LitElement {
         break;
     }
 
+    rows.push({
+      label: this._translate("card.date"),
+      value: DateTime.fromJSDate(event.date).toFormat("MMM dd", { locale }),
+    });
+
     return {
       category: "celestialEvent",
       name,
-      date: event.date,
       rows,
     };
   }
@@ -606,6 +644,7 @@ export class SkyTonightNativeCard extends LitElement {
     const rows: EventDataRow[] = [
       { label: this._translate("card.status"), value: statusValue },
       { label: this._translate("card.zhr"), value: String(shower.zhr) },
+      { label: this._translate("card.visibility"), value: visibilityValue },
       {
         label: this._translate("card.peakDate"),
         value: DateTime.fromJSDate(shower.peakLocalTime).toFormat(
@@ -613,13 +652,11 @@ export class SkyTonightNativeCard extends LitElement {
           { locale }
         ),
       },
-      { label: this._translate("card.visibility"), value: visibilityValue },
     ];
 
     return {
       category: "meteorShower",
       name,
-      date: shower.peak,
       rows,
     };
   }
@@ -750,11 +787,6 @@ export class SkyTonightNativeCard extends LitElement {
               </div>
             `
           )}
-          <div class="astro-data">
-            ${DateTime.fromJSDate(event.date).toFormat("MMM dd HH:mm", {
-              locale: this.getLocale(),
-            })}
-          </div>
         </div>
       </div>
     `;

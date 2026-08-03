@@ -8,7 +8,5 @@ export interface EventDataRow {
 export interface EventRow {
   category: EventCategory;
   name: string;
-  date: Date;
-  dateEnd?: Date;
   rows: EventDataRow[];
 }

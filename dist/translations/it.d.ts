@@ -31,6 +31,12 @@ export declare const it: {
         readonly radiantAboveHorizon: "{deg}° sopra l'orizzonte";
         readonly radiantBelowHorizon: "Sotto l'orizzonte stanotte";
         readonly elongation: "Elongazione";
+        readonly date: "Data";
+        readonly dayLength: "Durata del Giorno";
+        readonly equalDayNight: "Giorno e notte uguali";
+        readonly longestDay: "Giorno più lungo dell'anno";
+        readonly shortestDay: "Giorno più corto dell'anno";
+        readonly visibleAllNight: "Visibile tutta la notte";
         readonly eventEmpty: "Nessun evento in arrivo";
     };
     readonly eclipseKinds: {

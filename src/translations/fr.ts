@@ -31,6 +31,12 @@ export const fr = {
     radiantAboveHorizon: "{deg}° au-dessus de l'horizon",
     radiantBelowHorizon: "Sous l'horizon ce soir",
     elongation: "Élongation",
+    date: "Date",
+    dayLength: "Durée du jour",
+    equalDayNight: "Jour et nuit égaux",
+    longestDay: "Jour le plus long de l'année",
+    shortestDay: "Jour le plus court de l'année",
+    visibleAllNight: "Visible toute la nuit",
     eventEmpty: "Aucun événement à venir",
   },
   eclipseKinds: {

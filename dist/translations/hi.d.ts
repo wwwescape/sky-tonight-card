@@ -31,6 +31,12 @@ export declare const hi: {
         readonly radiantAboveHorizon: "क्षितिज से {deg}° ऊपर";
         readonly radiantBelowHorizon: "आज रात क्षितिज के नीचे";
         readonly elongation: "दिगंश";
+        readonly date: "तिथि";
+        readonly dayLength: "दिन की अवधि";
+        readonly equalDayNight: "दिन और रात बराबर";
+        readonly longestDay: "वर्ष का सबसे लंबा दिन";
+        readonly shortestDay: "वर्ष का सबसे छोटा दिन";
+        readonly visibleAllNight: "पूरी रात दिखाई देगा";
         readonly eventEmpty: "कोई आगामी घटना नहीं";
     };
     readonly eclipseKinds: {
