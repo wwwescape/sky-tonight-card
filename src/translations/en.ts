@@ -40,6 +40,7 @@ export const en = {
     eventEmpty: "No upcoming events",
     scrollTabsLeft: "Scroll tabs left",
     scrollTabsRight: "Scroll tabs right",
+    iconCredit: "Icons - planet, eclipse, stars & meteor by {icons8}",
   },
   eclipseKinds: {
     penumbral: "Penumbral",

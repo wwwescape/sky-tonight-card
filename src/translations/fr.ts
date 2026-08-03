@@ -40,6 +40,7 @@ export const fr = {
     eventEmpty: "Aucun événement à venir",
     scrollTabsLeft: "Faire défiler les onglets vers la gauche",
     scrollTabsRight: "Faire défiler les onglets vers la droite",
+    iconCredit: "Icônes - planète, éclipse, étoiles et météore par {icons8}",
   },
   eclipseKinds: {
     penumbral: "Pénombre",

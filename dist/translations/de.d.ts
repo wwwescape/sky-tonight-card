@@ -40,6 +40,7 @@ export declare const de: {
         readonly eventEmpty: "Keine bevorstehenden Ereignisse";
         readonly scrollTabsLeft: "Tabs nach links scrollen";
         readonly scrollTabsRight: "Tabs nach rechts scrollen";
+        readonly iconCredit: "Icons - Planet, Finsternis, Sterne & Meteor von {icons8}";
     };
     readonly eclipseKinds: {
         readonly penumbral: "Halbschatten";

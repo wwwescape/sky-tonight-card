@@ -40,6 +40,7 @@ export const hi = {
     eventEmpty: "कोई आगामी घटना नहीं",
     scrollTabsLeft: "टैब बाईं ओर स्क्रॉल करें",
     scrollTabsRight: "टैब दाईं ओर स्क्रॉल करें",
+    iconCredit: "आइकन - ग्रह, ग्रहण, तारे और उल्का {icons8} द्वारा",
   },
   eclipseKinds: {
     penumbral: "उपच्छाया",

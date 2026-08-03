@@ -40,6 +40,7 @@ export declare const fr: {
         readonly eventEmpty: "Aucun événement à venir";
         readonly scrollTabsLeft: "Faire défiler les onglets vers la gauche";
         readonly scrollTabsRight: "Faire défiler les onglets vers la droite";
+        readonly iconCredit: "Icônes - planète, éclipse, étoiles et météore par {icons8}";
     };
     readonly eclipseKinds: {
         readonly penumbral: "Pénombre";

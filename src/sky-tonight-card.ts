@@ -318,6 +318,22 @@ export class SkyTonightNativeCard extends LitElement {
         color: var(--object-data-color, #cccccc);
         padding: 8px 0;
       }
+
+      .icon-credit {
+        margin-top: 16px;
+        font-size: 0.7rem;
+        text-align: center;
+        color: var(--object-type-color, #aaaaaa);
+      }
+
+      .icon-credit a {
+        color: inherit;
+        text-decoration: underline;
+      }
+
+      .icon-credit a:hover {
+        color: var(--card-text-color, #ffffff);
+      }
     `;
   }
 
@@ -475,6 +491,7 @@ export class SkyTonightNativeCard extends LitElement {
           moonPhase,
           eventsByCategory
         )}
+        ${this.renderIconCredit()}
       </ha-card>
     `;
   }
@@ -876,6 +893,22 @@ export class SkyTonightNativeCard extends LitElement {
             `
           )}
         </div>
+      </div>
+    `;
+  }
+
+  private renderIconCredit(): TemplateResult {
+    const [before, after] = this._translate("card.iconCredit").split(
+      "{icons8}"
+    );
+    return html`
+      <div class="icon-credit">
+        ${before}<a
+          href="https://icons8.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Icons8</a
+        >${after ?? ""}
       </div>
     `;
   }

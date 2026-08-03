@@ -40,6 +40,7 @@ export const it = {
     eventEmpty: "Nessun evento in arrivo",
     scrollTabsLeft: "Scorri le schede a sinistra",
     scrollTabsRight: "Scorri le schede a destra",
+    iconCredit: "Icone - pianeta, eclissi, stelle e meteora di {icons8}",
   },
   eclipseKinds: {
     penumbral: "Penombrale",

@@ -34,6 +34,7 @@ export declare class SkyTonightNativeCard extends LitElement {
     protected updated(changedProperties: PropertyValues): void;
     private renderActiveTabPanel;
     private renderEventCard;
+    private renderIconCredit;
     private renderSolarSystemPanel;
     private getAltitude;
     private getRiseSet;

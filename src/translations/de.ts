@@ -40,6 +40,7 @@ export const de = {
     eventEmpty: "Keine bevorstehenden Ereignisse",
     scrollTabsLeft: "Tabs nach links scrollen",
     scrollTabsRight: "Tabs nach rechts scrollen",
+    iconCredit: "Icons - Planet, Finsternis, Sterne & Meteor von {icons8}",
   },
   eclipseKinds: {
     penumbral: "Halbschatten",

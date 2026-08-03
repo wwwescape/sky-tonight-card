@@ -40,6 +40,7 @@ export declare const hi: {
         readonly eventEmpty: "कोई आगामी घटना नहीं";
         readonly scrollTabsLeft: "टैब बाईं ओर स्क्रॉल करें";
         readonly scrollTabsRight: "टैब दाईं ओर स्क्रॉल करें";
+        readonly iconCredit: "आइकन - ग्रह, ग्रहण, तारे और उल्का {icons8} द्वारा";
     };
     readonly eclipseKinds: {
         readonly penumbral: "उपच्छाया";

@@ -40,6 +40,7 @@ export declare const it: {
         readonly eventEmpty: "Nessun evento in arrivo";
         readonly scrollTabsLeft: "Scorri le schede a sinistra";
         readonly scrollTabsRight: "Scorri le schede a destra";
+        readonly iconCredit: "Icone - pianeta, eclissi, stelle e meteora di {icons8}";
     };
     readonly eclipseKinds: {
         readonly penumbral: "Penombrale";

@@ -40,6 +40,7 @@ export declare const en: {
         readonly eventEmpty: "No upcoming events";
         readonly scrollTabsLeft: "Scroll tabs left";
         readonly scrollTabsRight: "Scroll tabs right";
+        readonly iconCredit: "Icons - planet, eclipse, stars & meteor by {icons8}";
     };
     readonly eclipseKinds: {
         readonly penumbral: "Penumbral";
