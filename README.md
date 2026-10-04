@@ -1,131 +1,143 @@
-# Sky Tonight Card
+<h1 align="center">Sky Tonight Card</h1>
 
-[![GH-release](https://img.shields.io/github/v/release/wwwescape/sky-tonight-card.svg?style=flat-square)](https://github.com/wwwescape/sky-tonight-card/releases)
-[![GH-last-commit](https://img.shields.io/github/last-commit/wwwescape/sky-tonight-card.svg?style=flat-square)](https://github.com/wwwescape/sky-tonight-card/commits/master)
-[![GH-code-size](https://img.shields.io/github/languages/code-size/wwwescape/sky-tonight-card.svg?color=red&style=flat-square)](https://github.com/wwwescape/sky-tonight-card)
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=flat-square)](https://github.com/hacs/default)
+<p align="center">
+  A Home Assistant dashboard card showing what's in the sky tonight — sun, moon, and planet
+  visibility, plus upcoming eclipses, celestial events, and meteor showers for your location.
+  Powered by <a href="https://github.com/cosinekitty/astronomy">Astronomy Engine</a>.
+</p>
 
+<p align="center">
+  <a href="https://github.com/wwwescape/sky-tonight-card/releases"><img src="https://img.shields.io/github/v/release/wwwescape/sky-tonight-card.svg?style=flat-square" alt="GitHub release" /></a>
+  <a href="https://github.com/wwwescape/sky-tonight-card/commits/main"><img src="https://img.shields.io/github/last-commit/wwwescape/sky-tonight-card.svg?style=flat-square" alt="GitHub last commit" /></a>
+  <a href="https://github.com/wwwescape/sky-tonight-card"><img src="https://img.shields.io/github/languages/code-size/wwwescape/sky-tonight-card.svg?color=red&style=flat-square" alt="GitHub code size" /></a>
+  <a href="https://hacs.xyz/docs/faq/custom_repositories/"><img src="https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=flat-square" alt="HACS Custom" /></a>
+</p>
 
-#### A Home Assistant card showing sun, moon, and planet visibility using [Astronomy Engine](https://github.com/cosinekitty/astronomy)
+## Screenshots
 
-![Example](example.png)
+![Sky Tonight Card](example.png)
 
+## Features
+
+- **Solar System** — rise and set times, visibility duration, and altitude for the Sun, Moon,
+  Mercury, Venus, Mars, Jupiter, Saturn, Uranus, and Neptune, plus the current moon phase.
+- **Visibility indicators** — whether each object is visible to the naked eye, with binoculars,
+  or with a telescope.
+- **Eclipses** — upcoming lunar eclipses and solar eclipses visible from your location, with
+  kind, obscuration, duration, and peak time.
+- **Celestial events** — equinoxes and solstices, planetary oppositions, greatest elongations
+  of Mercury and Venus, and supermoons.
+- **Meteor showers** — the 13 major annual showers, with their zenith hourly rate (ZHR), status,
+  and a peak viewing time worked out for your location.
+- **Tabbed layout** — Solar System, Eclipses, Celestial Events, and Meteor Showers tabs, each
+  showing up to 10 entries, looking about 18 months ahead.
+- **Customizable** — title, location, which objects and tabs to show, and every card color,
+  all from the visual editor or YAML.
+- **Languages** — English, French, German, Hindi, and Italian, following your Home Assistant
+  language by default.
 
 ## Installation
 
+### HACS (recommended)
 
-### HACS install
-1. Open HACS.
-2. Click on the three dot menu in the top right corner of the screen → "Custom Repositories"
-3. Paste https://github.com/wwwescape/sky-tonight-card in the Repositories textbox and select Dashboard in the Type dropdown.
-4. Click Add.
-5. Search for 'Sky Tonight Card' and click the three dot menu besides it.
-6. Click Download.
-7. Finally, refresh your browser window.
+1. Open HACS, click the ⋮ menu in the top right corner, and choose **Custom repositories**.
+2. Paste `https://github.com/wwwescape/sky-tonight-card`, choose **Dashboard** as the type, and
+   click **Add**.
+3. Search for **Sky Tonight Card**, click the ⋮ menu next to it, and choose **Download**.
+4. Refresh your browser.
 
+### Manual
 
-### Manual install
-1. Navigate to your `<config>/www/` folder inside your Home Assistant installation and create a new folder named `sky-tonight-card`.
-2. Manually download [sky-tonight-card.js](https://github.com/wwwescape/sky-tonight-card/releases/latest/download/sky-tonight-card.js).
-3. Place the file inside the `sky-tonight-card` folder you created in step 1.
-4. Add the following to your `configuration.yaml` file:
-  ```yaml
-  lovelace:
-    resources:
-      - url: /local/sky-tonight-card/sky-tonight-card.js
-        type: module
-  ```
-5. Alternately, go to `Settings` -> `Dashboards`. Then in the top right corner, click the 3 dots icon and click `Resources`. Click the `+ Add Resource` button in the bottom right corner. Add `/local/sky-tonight-card/sky-tonight-card.js` as the `URL` and choose `JavaScript Module` as the `Resource Type`. Click `Create`.
-6. Finally, refresh your browser window.
+1. Download [sky-tonight-card.js](https://github.com/wwwescape/sky-tonight-card/releases/latest/download/sky-tonight-card.js)
+   and place it in `<config>/www/sky-tonight-card/`.
+2. Add it as a dashboard resource: go to **Settings → Dashboards → ⋮ → Resources → Add
+   Resource**, enter `/local/sky-tonight-card/sky-tonight-card.js` as the URL, and choose
+   **JavaScript Module**. Or, in YAML mode, add it to `configuration.yaml`:
 
-**Note:** The url path may need to be adjusted to reflect the location of your configuration direction, as seen from the running system.  For example on some HAAS systems it will appear to be `/root/config/www/sky-tonight-card/sky-tonight-card.js`  (i.e /root/config instead).
+   ```yaml
+   lovelace:
+     resources:
+       - url: /local/sky-tonight-card/sky-tonight-card.js
+         type: module
+   ```
 
+3. Refresh your browser.
 
 ## Configuration
 
-| Name                  | Type          | Default                               | Description                                                                                                                     |
-| --------------------- | ------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| type                  | string        | **Required**                          | `custom:sky-tonight-card`                                                                                                       |
-| title                 | string        | `Sky Tonight`                         | Title of the card                                                                                                               |
-| latitude              | number        |                                       | Latitude of the observer (uses Home Assistant config if not specified)                                                          |
-| longitude             | number        |                                       | Longitude of the observer (uses Home Assistant config if not specified)                                                         |
-| elevation             | number        | `0`                                   | Elevation of the observer in metres above sea level                                                                             |
-| languageOverride      | string        |                                       | Override language (options: "en", "hi", "fr" - uses Home Assistant language if not specified)                                   |
-| showBelowHorizon      | boolean       | `false`                               | Set to true to display planetary bodies below the horizon as well                                                               |
-| showSun               | boolean       | `true`                                | Set to false to hide the Sun                                                                                                    |
-| showConfiguration     | boolean       | `true`                                | Set to false to hide the configuration section in the card                                                                      |
-| showEclipses          | boolean       | `true`                                | Set to false to hide upcoming lunar and local solar eclipses                                                                    |
-| showMeteorShowers     | boolean       | `true`                                | Set to false to hide active/upcoming meteor showers                                                                             |
-| showCelestialEvents   | boolean       | `true`                                | Set to false to hide equinoxes/solstices, planetary oppositions, greatest elongations, and supermoons                          |
-| colors                | object        |                                       | Object containing color overrides (see [Color Customization](#color-customization) below)                                       |
+Add the card from the dashboard editor (search for **Sky Tonight Card**) and set everything in
+the visual editor, or configure it in YAML:
 
-### Upcoming Events
+| Name                  | Type    | Default              | Description                                                                 |
+| --------------------- | ------- | -------------------- | --------------------------------------------------------------------------- |
+| `type`                | string  | **Required**         | `custom:sky-tonight-card`                                                   |
+| `cardTitle`           | string  | `Sky Tonight`        | Title of the card                                                           |
+| `lat`                 | number  | Home Assistant value | Observer latitude                                                           |
+| `lon`                 | number  | Home Assistant value | Observer longitude                                                          |
+| `elev`                | number  | `0`                  | Observer elevation, in metres above sea level                               |
+| `languageOverride`    | string  | Home Assistant value | Card language: `en`, `fr`, `de`, `hi`, or `it`                              |
+| `showSun`             | boolean | `true`               | Show the Sun                                                                |
+| `showBelowHorizon`    | boolean | `false`              | Also show objects that are currently below the horizon                      |
+| `showConfiguration`   | boolean | `false`              | Show the latitude/longitude/elevation block (the visual editor turns it on) |
+| `showEclipses`        | boolean | `true`               | Show the Eclipses tab                                                       |
+| `showCelestialEvents` | boolean | `true`               | Show the Celestial Events tab                                               |
+| `showMeteorShowers`   | boolean | `true`               | Show the Meteor Showers tab                                                 |
+| `colors`              | object  |                      | Color overrides — see [Colors](#colors)                                     |
 
-When `showEclipses`, `showMeteorShowers`, or `showCelestialEvents` is enabled,
-the card adds a collapsible "Upcoming Events" section below the sun/moon/planet
-list, grouped by category:
+### Colors
 
-- **Eclipses** — the next lunar and local solar eclipses (the solar eclipse
-  search is already filtered to what's visible from the card's configured
-  latitude/longitude), with type, kind (penumbral/partial/annular/total),
-  obscuration %, and the begin–end time window. A currently-in-progress
-  eclipse is flagged as such.
-- **Meteor showers** — the 13 major annual showers (Quadrantids, Lyrids, Eta
-  Aquariids, Alpha Capricornids, Southern Delta Aquariids, Perseids,
-  Draconids, Southern Taurids, Orionids, Northern Taurids, Leonids, Geminids,
-  Ursids), shown when active or when their peak is within 60 days, along with
-  their zenith hourly rate (ZHR).
-- **Celestial events** — the next equinox/solstice, the next opposition for
-  each outer planet (Mars, Jupiter, Saturn, Uranus, Neptune), the next
-  greatest elongation for Mercury and Venus (with morning/evening
-  visibility), and any upcoming supermoons (full moons within ~360,000 km of
-  Earth).
+| Property           | Default   | Description                                 |
+| ------------------ | --------- | ------------------------------------------- |
+| `cardBackground`   | `#1b2431` | Background color of the card                |
+| `cardTitle`        | `#ffffff` | Color of the card title                     |
+| `objectBackground` | `#223044` | Background color of each object's container |
+| `objectName`       | `#ffffff` | Color of each object's name                 |
+| `objectData`       | `#cccccc` | Color of each object's data                 |
+| `objectType`       | `#aaaaaa` | Color of each object's type                 |
 
-Each category looks ahead roughly 18 months and caps how many events it
-surfaces, so the section stays a reasonable length even though the
-underlying searches could otherwise return results far into the future.
-
-### Color Customization
-
-You can customize the card's appearance by providing a `colors` object with any of these properties:
-
-| Property             | Default       | Description                                                                                                                     |
-| -------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| cardBackground       | `#1b2431`     | Background color of the card                                                                                                    |
-| cardTitle            | `#ffffff`     | Color of the card title                                                                                                         |
-| objectBackground     | `#223044`     | Background color of each object's container                                                                                     |
-| objectName           | `#ffffff`     | Color of the object's name                                                                                                      |
-| objectData           | `#cccccc`     | Color of the object's data (right side text)                                                                                    |
-| objectType           | `#aaaaaa`     | Color of the object's type text                                                                                                 |
-
-### Example Configuration
+### Example
 
 ```yaml
 type: custom:sky-tonight-card
 cardTitle: Objects in the sky
-latitude: 40.7128
-longitude: -74.0060
-elevation: 10
-showBelowHorizon: false
+lat: 40.7128
+lon: -74.0060
+elev: 10
 showSun: true
+showBelowHorizon: false
 showConfiguration: true
 showEclipses: true
-showMeteorShowers: true
 showCelestialEvents: true
-languageOverride: "en"
+showMeteorShowers: true
 colors:
   cardBackground: "#1b2431"
   cardTitle: "#ffffff"
-  objectBackground: "#223044"
-  objectName: "#ffffff"
-  objectData: "#cccccc"
-  objectType: "#aaaaaa"
 ```
-
 
 ## Adding Translations
 
-1. Duplicate `translation-template.ts` as `[lang-code].ts`
-2. Fill in all string values
-3. Add the language to `translations/index.ts`
-4. Submit pull request
+1. Copy `translation-template.ts` to `src/translations/<lang-code>.ts`.
+2. Fill in every string.
+3. Register the language in `src/translations/index.ts`.
+4. Open a pull request.
+
+## Development
+
+```bash
+git clone https://github.com/wwwescape/sky-tonight-card.git
+cd sky-tonight-card
+npm ci
+npm run build
+```
+
+The build writes `dist/sky-tonight-card.js`. Pushing a version tag (e.g. `git tag v1.4.0 && git push origin v1.4.0`) builds the card and publishes it to a new GitHub Release.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
+
+## Support
+
+If you find Sky Tonight Card useful, consider buying me a coffee:
+
+[<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="40" />](https://buymeacoffee.com/wwwescape)
