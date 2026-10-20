@@ -387,7 +387,9 @@ export class SkyTonightNativeCard extends LitElement {
     const longitude =
       this.config.lon ?? this.config.longitude ?? this.hass.config.longitude;
     const elevation = this.config.elev ?? this.config.elevation ?? 0;
+    const showTitle = this.config.showTitle !== false;
     const showSun = this.config.showSun !== false;
+    const showMoonPhase = this.config.showMoonPhase !== false;
     const showBelowHorizon = this.config.showBelowHorizon === true;
     const showConfiguration = this.config.showConfiguration === true;
     const showEclipses = this.config.showEclipses !== false;
@@ -431,7 +433,9 @@ export class SkyTonightNativeCard extends LitElement {
       })
       .sort((a, b) => a.rise.toMillis() - b.rise.toMillis());
 
-    const moonPhase = this.getMoonPhase(now.toJSDate());
+    const moonPhase = showMoonPhase
+      ? this.getMoonPhase(now.toJSDate())
+      : null;
 
     const upcomingEvents = this.getUpcomingEvents(observer, now, {
       showEclipses,
@@ -465,7 +469,7 @@ export class SkyTonightNativeCard extends LitElement {
     return html`
       ${style}
       <ha-card>
-        <h2>${cardTitle}</h2>
+        ${showTitle ? html`<h2>${cardTitle}</h2>` : ""}
         ${showConfiguration !== false
           ? html`
               <div>
@@ -855,7 +859,7 @@ export class SkyTonightNativeCard extends LitElement {
       showMeteorShowers: boolean;
     },
     celestialObjectsWithTimes: CelestialObjectDisplay[],
-    moonPhase: string,
+    moonPhase: string | null,
     eventsByCategory: Map<EventCategory, EventRow[]>
   ): TemplateResult {
     const tabs = this.getVisibleTabs(flags);
@@ -919,7 +923,7 @@ export class SkyTonightNativeCard extends LitElement {
 
   private renderSolarSystemPanel(
     celestialObjectsWithTimes: CelestialObjectDisplay[],
-    moonPhase: string
+    moonPhase: string | null
   ): TemplateResult {
     return html`
       <div class="tab-panel astro-list">
@@ -948,7 +952,7 @@ export class SkyTonightNativeCard extends LitElement {
                   ${this._translate("card.altitude")}:
                   ${obj.altitude.toFixed(1)}°
                 </div>
-                ${obj.body === Body.Moon
+                ${obj.body === Body.Moon && moonPhase
                   ? html`
                       <div class="astro-data">
                         ${this._translate("card.moonPhase")}:

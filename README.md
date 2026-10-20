@@ -76,7 +76,9 @@ the visual editor, or configure it in YAML:
 | `lon`                 | number  | Home Assistant value | Observer longitude                                                          |
 | `elev`                | number  | `0`                  | Observer elevation, in metres above sea level                               |
 | `languageOverride`    | string  | Home Assistant value | Card language: `en`, `fr`, `de`, `hi`, or `it`                              |
+| `showTitle`           | boolean | `true`               | Show the card title                                                         |
 | `showSun`             | boolean | `true`               | Show the Sun                                                                |
+| `showMoonPhase`       | boolean | `true`               | Show the moon phase on the Moon's entry                                     |
 | `showBelowHorizon`    | boolean | `false`              | Also show objects that are currently below the horizon                      |
 | `showConfiguration`   | boolean | `false`              | Show the latitude/longitude/elevation block (the visual editor turns it on) |
 | `showEclipses`        | boolean | `true`               | Show the Eclipses tab                                                       |
@@ -100,10 +102,12 @@ the visual editor, or configure it in YAML:
 ```yaml
 type: custom:sky-tonight-card
 cardTitle: Objects in the sky
+showTitle: true
 lat: 40.7128
 lon: -74.0060
 elev: 10
 showSun: true
+showMoonPhase: true
 showBelowHorizon: false
 showConfiguration: true
 showEclipses: true

@@ -112,7 +112,9 @@ export declare const en: {
         readonly elevationUnit: "meters";
         readonly languageOverride: "Language Override";
         readonly useHASetting: "Use HA Setting";
+        readonly showTitle: "Show title";
         readonly showSun: "Show Sun";
+        readonly showMoonPhase: "Show moon phase";
         readonly showBelowHorizon: "Show objects below horizon";
         readonly showConfiguration: "Show configuration";
         readonly showEclipses: "Show eclipses";

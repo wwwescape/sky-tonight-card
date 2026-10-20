@@ -112,7 +112,9 @@ export declare const hi: {
         readonly elevationUnit: "मीटर";
         readonly languageOverride: "भाषा अधिरोपण";
         readonly useHASetting: "HA सेटिंग का उपयोग करें";
+        readonly showTitle: "शीर्षक दिखाएँ";
         readonly showSun: "सूर्य दिखाएँ";
+        readonly showMoonPhase: "चंद्रमा की अवस्था दिखाएँ";
         readonly showBelowHorizon: "क्षितिज के नीचे वस्तुएँ दिखाएँ";
         readonly showConfiguration: "कॉन्फ़िगरेशन दिखाएँ";
         readonly showEclipses: "ग्रहण दिखाएँ";

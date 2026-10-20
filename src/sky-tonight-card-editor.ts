@@ -117,8 +117,14 @@ export class SkyTonightNativeCardEditor extends LitElement {
       return html``;
     }
 
+    if (this._config.showTitle === undefined) {
+      this._config.showTitle = true;
+    }
     if (this._config.showSun === undefined) {
       this._config.showSun = true;
+    }
+    if (this._config.showMoonPhase === undefined) {
+      this._config.showMoonPhase = true;
     }
     if (this._config.showBelowHorizon === undefined) {
       this._config.showBelowHorizon = false;
@@ -231,6 +237,36 @@ export class SkyTonightNativeCardEditor extends LitElement {
         </div>
 
         <div class="config-row">
+          <label>${this._translate("editor.showTitle")}:</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input
+                type="radio"
+                name="showTitle"
+                .checked=${this._config.showTitle}
+                @change=${() => {
+                  this._config.showTitle = true;
+                  fireEvent(this, "config-changed", { config: this._config });
+                }}
+              />
+              ${this._translate("editor.yes")}
+            </label>
+            <label class="radio-option">
+              <input
+                type="radio"
+                name="showTitle"
+                .checked=${!this._config.showTitle}
+                @change=${() => {
+                  this._config.showTitle = false;
+                  fireEvent(this, "config-changed", { config: this._config });
+                }}
+              />
+              ${this._translate("editor.no")}
+            </label>
+          </div>
+        </div>
+
+        <div class="config-row">
           <label>${this._translate("editor.showSun")}:</label>
           <div class="radio-group">
             <label class="radio-option">
@@ -252,6 +288,36 @@ export class SkyTonightNativeCardEditor extends LitElement {
                 .checked=${!this._config.showSun}
                 @change=${() => {
                   this._config.showSun = false;
+                  fireEvent(this, "config-changed", { config: this._config });
+                }}
+              />
+              ${this._translate("editor.no")}
+            </label>
+          </div>
+        </div>
+
+        <div class="config-row">
+          <label>${this._translate("editor.showMoonPhase")}:</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input
+                type="radio"
+                name="showMoonPhase"
+                .checked=${this._config.showMoonPhase}
+                @change=${() => {
+                  this._config.showMoonPhase = true;
+                  fireEvent(this, "config-changed", { config: this._config });
+                }}
+              />
+              ${this._translate("editor.yes")}
+            </label>
+            <label class="radio-option">
+              <input
+                type="radio"
+                name="showMoonPhase"
+                .checked=${!this._config.showMoonPhase}
+                @change=${() => {
+                  this._config.showMoonPhase = false;
                   fireEvent(this, "config-changed", { config: this._config });
                 }}
               />
