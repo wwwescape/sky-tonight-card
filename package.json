@@ -1,6 +1,6 @@
 {
   "name": "sky-tonight-card",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "type": "module",
   "description": "A Home Assistant card showing sun, moon, and planet visibility using Astronomy Engine",
   "scripts": {
