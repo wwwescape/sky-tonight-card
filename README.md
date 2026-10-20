@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="images/logo.png" alt="Sky Tonight logo" width="128" />
+</p>
+
 <h1 align="center">Sky Tonight Card</h1>
 
 <p align="center">

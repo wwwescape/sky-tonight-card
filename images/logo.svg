@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="sky" cx="0.35" cy="0.3" r="0.85">
+      <stop offset="0" stop-color="#26386b"/>
+      <stop offset="1" stop-color="#0b1026"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff3c4" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#fff3c4" stop-opacity="0"/>
+    </radialGradient>
+    <mask id="crescent">
+      <circle cx="372" cy="150" r="64" fill="#fff"/>
+      <circle cx="402" cy="126" r="56" fill="#000"/>
+    </mask>
+  </defs>
+
+  <!-- Night sky -->
+  <circle cx="256" cy="256" r="256" fill="url(#sky)"/>
+
+  <!-- Stars -->
+  <g fill="#ffffff">
+    <circle cx="128" cy="132" r="5"/>
+    <circle cx="196" cy="84" r="3.5"/>
+    <circle cx="92" cy="232" r="3.5"/>
+    <circle cx="282" cy="66" r="4"/>
+    <circle cx="246" cy="178" r="3"/>
+    <circle cx="452" cy="268" r="4"/>
+    <circle cx="406" cy="348" r="3"/>
+    <path d="M160 190 l4 12 12 4 -12 4 -4 12 -4 -12 -12 -4 12 -4z" opacity="0.9"/>
+  </g>
+
+  <!-- Moon -->
+  <circle cx="372" cy="150" r="100" fill="url(#glow)"/>
+  <circle cx="372" cy="150" r="64" fill="#f6e7a6" mask="url(#crescent)"/>
+
+  <!-- Tripod -->
+  <g stroke="#c9d2e3" stroke-width="14" stroke-linecap="round" fill="none">
+    <line x1="210" y1="340" x2="138" y2="452"/>
+    <line x1="210" y1="340" x2="210" y2="470"/>
+    <line x1="210" y1="340" x2="282" y2="452"/>
+  </g>
+
+  <!-- Telescope, aimed at the Moon -->
+  <g transform="translate(210 330) rotate(-42)">
+    <rect x="-150" y="-12" width="34" height="24" rx="5" fill="#9aa6bd"/>
+    <rect x="-120" y="-26" width="236" height="52" rx="10" fill="#eef2f8"/>
+    <rect x="-24" y="-26" width="22" height="52" fill="#41bdf5"/>
+    <rect x="108" y="-34" width="44" height="68" rx="8" fill="#41bdf5"/>
+  </g>
+  <circle cx="210" cy="338" r="16" fill="#9aa6bd"/>
+</svg>
