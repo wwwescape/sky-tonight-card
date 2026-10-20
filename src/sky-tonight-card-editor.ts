@@ -162,10 +162,11 @@ export class SkyTonightNativeCardEditor extends LitElement {
           >
           <input
             type="number"
-            .value=${this._config.lat || ""}
+            .value=${this._config.lat ?? this._config.latitude ?? ""}
             .placeholder=${this.hass.config.latitude}
             @input=${(e: Event) => {
               const input = e.target as HTMLInputElement;
+              delete this._config.latitude;
               this._config.lat = input.value
                 ? parseFloat(input.value)
                 : undefined;
@@ -181,10 +182,11 @@ export class SkyTonightNativeCardEditor extends LitElement {
           >
           <input
             type="number"
-            .value=${this._config.lon || ""}
+            .value=${this._config.lon ?? this._config.longitude ?? ""}
             .placeholder=${this.hass.config.longitude}
             @input=${(e: Event) => {
               const input = e.target as HTMLInputElement;
+              delete this._config.longitude;
               this._config.lon = input.value
                 ? parseFloat(input.value)
                 : undefined;
@@ -201,9 +203,10 @@ export class SkyTonightNativeCardEditor extends LitElement {
           >
           <input
             type="number"
-            .value=${this._config.elev || 0}
+            .value=${this._config.elev ?? this._config.elevation ?? 0}
             @input=${(e: Event) => {
               const input = e.target as HTMLInputElement;
+              delete this._config.elevation;
               this._config.elev = input.value ? parseFloat(input.value) : 0;
               fireEvent(this, "config-changed", { config: this._config });
             }}

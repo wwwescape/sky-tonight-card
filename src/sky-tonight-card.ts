@@ -380,9 +380,13 @@ export class SkyTonightNativeCard extends LitElement {
     if (!this.hass || !this.config) return html``;
 
     const cardTitle = this.config.cardTitle || this._translate("card.title");
-    const latitude = this.config.lat || this.hass.config.latitude;
-    const longitude = this.config.lon || this.hass.config.longitude;
-    const elevation = this.config.elev || 0;
+    // Older README versions documented latitude/longitude/elevation, so those
+    // keys are still accepted as fallbacks for lat/lon/elev.
+    const latitude =
+      this.config.lat ?? this.config.latitude ?? this.hass.config.latitude;
+    const longitude =
+      this.config.lon ?? this.config.longitude ?? this.hass.config.longitude;
+    const elevation = this.config.elev ?? this.config.elevation ?? 0;
     const showSun = this.config.showSun !== false;
     const showBelowHorizon = this.config.showBelowHorizon === true;
     const showConfiguration = this.config.showConfiguration === true;

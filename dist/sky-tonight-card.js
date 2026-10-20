@@ -111,9 +111,9 @@ const lt=t=>(e,n)=>{void 0!==n?n.addInitializer((()=>{customElements.define(t,e)
           >
           <input
             type="number"
-            .value=${this._config.lat||""}
+            .value=${this._config.lat??this._config.latitude??""}
             .placeholder=${this.hass.config.latitude}
-            @input=${t=>{const e=t.target;this._config.lat=e.value?parseFloat(e.value):void 0,Qa(this,"config-changed",{config:this._config})}}
+            @input=${t=>{const e=t.target;delete this._config.latitude,this._config.lat=e.value?parseFloat(e.value):void 0,Qa(this,"config-changed",{config:this._config})}}
           />
         </div>
 
@@ -124,9 +124,9 @@ const lt=t=>(e,n)=>{void 0!==n?n.addInitializer((()=>{customElements.define(t,e)
           >
           <input
             type="number"
-            .value=${this._config.lon||""}
+            .value=${this._config.lon??this._config.longitude??""}
             .placeholder=${this.hass.config.longitude}
-            @input=${t=>{const e=t.target;this._config.lon=e.value?parseFloat(e.value):void 0,Qa(this,"config-changed",{config:this._config})}}
+            @input=${t=>{const e=t.target;delete this._config.longitude,this._config.lon=e.value?parseFloat(e.value):void 0,Qa(this,"config-changed",{config:this._config})}}
           />
         </div>
 
@@ -138,8 +138,8 @@ const lt=t=>(e,n)=>{void 0!==n?n.addInitializer((()=>{customElements.define(t,e)
           >
           <input
             type="number"
-            .value=${this._config.elev||0}
-            @input=${t=>{const e=t.target;this._config.elev=e.value?parseFloat(e.value):0,Qa(this,"config-changed",{config:this._config})}}
+            .value=${this._config.elev??this._config.elevation??0}
+            @input=${t=>{const e=t.target;delete this._config.elevation,this._config.elev=e.value?parseFloat(e.value):0,Qa(this,"config-changed",{config:this._config})}}
           />
         </div>
 
@@ -654,7 +654,7 @@ const lt=t=>(e,n)=>{void 0!==n?n.addInitializer((()=>{customElements.define(t,e)
       .icon-credit a:hover {
         color: var(--card-text-color, #ffffff);
       }
-    `}_translate(t){const e=this.languageOverride||this.hass?.language||"en",[n,i]=t.split("."),s=Da[e]?.[n],r=Da.en[n];return s?.[i]||r?.[i]||t}setConfig(t){this.config={...this.config,...t,colors:{...this.config.colors,...t.colors}},this.languageOverride=t.languageOverride}static getConfigElement(){return document.createElement("sky-tonight-card-editor")}getLocale(){return this.languageOverride||this.hass?.locale?.language||"en-US"}render(){if(!this.hass||!this.config)return H``;const t=this.config.cardTitle||this._translate("card.title"),e=this.config.lat||this.hass.config.latitude,n=this.config.lon||this.hass.config.longitude,i=this.config.elev||0,s=!1!==this.config.showSun,r=!0===this.config.showBelowHorizon,o=!0===this.config.showConfiguration,a=!1!==this.config.showEclipses,l=!1!==this.config.showCelestialEvents,c=!1!==this.config.showMeteorShowers,u=xa.local(),h=new Ie(e,n,i),d=nl.filter((t=>s||t.body!==ee.Sun)).map((t=>{const{rise:s,set:r}=this.getRiseSet(h,t.body,u);if(!s||!r)return null;const o=this.getAltitude(t.body,u.toJSDate(),e,n,i),a=this.getLocale();return{...t,rise:s,set:r,riseStr:s.toFormat("MMM dd HH:mm",{locale:a}),setStr:r.toFormat("MMM dd HH:mm",{locale:a}),duration:this.calculateDuration(s,r),altitude:o}})).filter((t=>!!t&&!(!r&&t.altitude<0))).sort(((t,e)=>t.rise.toMillis()-e.rise.toMillis())),f=this.getMoonPhase(u.toJSDate()),m=this.getUpcomingEvents(h,u,{showEclipses:a,showCelestialEvents:l,showMeteorShowers:c}),g=this.groupEventsByCategory(m);this.lastMaxTabRowCount=Math.max(Math.min(d.length,10),...Array.from(g.values()).map((t=>Math.min(t.length,10))),0);const p=H`
+    `}_translate(t){const e=this.languageOverride||this.hass?.language||"en",[n,i]=t.split("."),s=Da[e]?.[n],r=Da.en[n];return s?.[i]||r?.[i]||t}setConfig(t){this.config={...this.config,...t,colors:{...this.config.colors,...t.colors}},this.languageOverride=t.languageOverride}static getConfigElement(){return document.createElement("sky-tonight-card-editor")}getLocale(){return this.languageOverride||this.hass?.locale?.language||"en-US"}render(){if(!this.hass||!this.config)return H``;const t=this.config.cardTitle||this._translate("card.title"),e=this.config.lat??this.config.latitude??this.hass.config.latitude,n=this.config.lon??this.config.longitude??this.hass.config.longitude,i=this.config.elev??this.config.elevation??0,s=!1!==this.config.showSun,r=!0===this.config.showBelowHorizon,o=!0===this.config.showConfiguration,a=!1!==this.config.showEclipses,l=!1!==this.config.showCelestialEvents,c=!1!==this.config.showMeteorShowers,u=xa.local(),h=new Ie(e,n,i),d=nl.filter((t=>s||t.body!==ee.Sun)).map((t=>{const{rise:s,set:r}=this.getRiseSet(h,t.body,u);if(!s||!r)return null;const o=this.getAltitude(t.body,u.toJSDate(),e,n,i),a=this.getLocale();return{...t,rise:s,set:r,riseStr:s.toFormat("MMM dd HH:mm",{locale:a}),setStr:r.toFormat("MMM dd HH:mm",{locale:a}),duration:this.calculateDuration(s,r),altitude:o}})).filter((t=>!!t&&!(!r&&t.altitude<0))).sort(((t,e)=>t.rise.toMillis()-e.rise.toMillis())),f=this.getMoonPhase(u.toJSDate()),m=this.getUpcomingEvents(h,u,{showEclipses:a,showCelestialEvents:l,showMeteorShowers:c}),g=this.groupEventsByCategory(m);this.lastMaxTabRowCount=Math.max(Math.min(d.length,10),...Array.from(g.values()).map((t=>Math.min(t.length,10))),0);const p=H`
       <style>
         :host {
           --card-background-color: ${this.config.colors?.cardBackground||"#1b2431"};
